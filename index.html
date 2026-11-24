@@ -1,0 +1,798 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Governance dell'Intelligenza Artificiale a scuola | Generatore gratuito</title>
+<style>
+:root{--navy:#17324d;--blue:#246b9e;--pale:#edf4f8;--line:#d6e0e8;--ink:#243342;--muted:#637487;--white:#fff;--green:#26734d;--amber:#9b6815}
+*{box-sizing:border-box}body{margin:0;background:#f3f6f8;color:var(--ink);font:15px/1.5 system-ui,-apple-system,"Segoe UI",sans-serif}
+header{background:linear-gradient(120deg,#17324d,#285e80);color:white;padding:28px max(20px,calc((100% - 1180px)/2))}
+header h1{margin:0 0 6px;font-size:clamp(24px,4vw,34px)}header p{margin:0;max-width:850px;color:#e0edf5}
+.wrap{max-width:1180px;margin:24px auto;padding:0 18px;display:grid;grid-template-columns:260px minmax(0,1fr);gap:20px}
+nav,.panel,.preview{background:white;border:1px solid var(--line);border-radius:13px;box-shadow:0 2px 8px #17324d0a}
+nav{padding:14px;height:max-content;position:sticky;top:12px}nav strong{display:block;padding:8px 10px;color:var(--navy)}
+nav button{width:100%;text-align:left;border:0;background:transparent;padding:9px 10px;border-radius:8px;color:#42576b;cursor:pointer;font:inherit}
+nav button.active,nav button:hover{background:var(--pale);color:var(--navy);font-weight:650}
+main{min-width:0}.panel{padding:24px;margin-bottom:18px}.panel h2{margin:0 0 5px;color:var(--navy);font-size:23px}.intro{color:var(--muted);margin:0 0 20px}
+.section{display:none}.section.active{display:block}
+.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:15px}
+.field{display:flex;flex-direction:column;gap:5px}.field.full{grid-column:1/-1}
+label{font-weight:650;color:#334b60}small.help{color:var(--muted);font-size:12px}
+input,select,textarea{width:100%;border:1px solid #bdcbd6;border-radius:8px;padding:10px 11px;font:inherit;color:var(--ink);background:white}
+textarea{min-height:90px;resize:vertical}input:focus,select:focus,textarea:focus{outline:2px solid #9bc6e1;border-color:var(--blue)}
+.checks{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin-top:5px}
+.check{display:flex;gap:8px;align-items:flex-start;border:1px solid var(--line);border-radius:8px;padding:9px;font-weight:450}
+.check input{width:auto;margin-top:4px}
+.actions{display:flex;flex-wrap:wrap;gap:9px;margin-top:20px}
+button.primary,.btn{border:0;border-radius:8px;padding:10px 15px;background:var(--blue);color:white;font:650 14px system-ui;cursor:pointer}
+button.secondary{border:1px solid #b8c8d5;border-radius:8px;padding:9px 13px;background:white;color:var(--navy);font:600 14px system-ui;cursor:pointer}
+label.secondary{display:inline-flex;align-items:center;justify-content:center;border:1px solid #b8c8d5;border-radius:8px;padding:9px 13px;background:white;color:var(--navy);font:600 14px system-ui;cursor:pointer;line-height:1.4}label.secondary:hover{background:var(--pale);border-color:#8fa9bb}
+button.danger{background:#fff3f1;color:#9d3427;border:1px solid #e7c5c0}
+.cardrow{border:1px solid var(--line);border-radius:10px;padding:14px;margin:12px 0;background:#fbfdfe}
+.cardrow .grid{gap:10px}.rowhead{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}
+.note{padding:12px 14px;border-left:4px solid #d3a34b;background:#fff9ed;border-radius:5px;color:#654b1e;margin:15px 0}
+.audit-summary{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin:14px 0}
+.audit-count{border:1px solid var(--line);border-radius:9px;padding:12px;background:#fbfdfe}
+.audit-count strong{display:block;font-size:22px;line-height:1.2}
+.audit-group{border:1px solid var(--line);border-radius:10px;padding:14px;margin:13px 0;background:#fff}
+.audit-group h3{margin:0 0 10px;font-size:17px}
+.audit-item{border-top:1px solid var(--line);padding:11px 0}
+.audit-item:first-of-type{border-top:0}
+.audit-item p{margin:4px 0;color:var(--muted);font-size:13px}
+.audit-jump{margin-top:7px;padding:6px 10px;border:1px solid #b8c8d5;border-radius:7px;background:white;color:var(--navy);font:600 12px system-ui;cursor:pointer}
+.audit-jump:hover{background:var(--pale)}
+@media(max-width:650px){.audit-summary{grid-template-columns:1fr}}
+.progress{height:7px;background:#e5edf2;border-radius:20px;overflow:hidden;margin:14px 0}.progress span{display:block;height:100%;background:#3d8c70;width:0}
+.topline{display:flex;justify-content:space-between;gap:10px;align-items:center;flex-wrap:wrap;color:var(--muted);font-size:13px}
+#output{display:none;background:white;border:1px solid var(--line);border-radius:12px;padding:24px;margin:20px 0}
+#documentPreview{max-width:900px;margin:auto;font-family:Georgia,serif;color:#222;line-height:1.6}
+#documentPreview h1,#documentPreview h2,#documentPreview h3{font-family:Georgia,serif;color:#17324d}
+#documentPreview h1{text-align:center;font-size:26px;margin:35px 0 8px}
+#documentPreview h2{font-size:20px;border-bottom:1px solid #9aabb8;padding-bottom:5px;margin-top:28px}
+#documentPreview h3{font-size:16px;margin-top:18px}
+#documentPreview p{margin:8px 0}#documentPreview li{margin:4px 0}#documentPreview .pending-field{display:inline-block;background:#fff1d6;color:#8a4b08;border:1px solid #e6b65c;border-radius:4px;padding:1px 5px;font-weight:700;font-size:.92em}#documentPreview .completion-page{border:1px solid #e3b65f;background:#fffaf0;padding:18px 22px;margin:22px 0 30px;break-inside:avoid}#documentPreview .completion-page h2{margin-top:0}#documentPreview .completion-page li{margin:7px 0}#documentPreview .pending-blocking h3{color:#a52a2a}#documentPreview .pending-attention h3{color:#956000}#documentPreview .pending-suggestion h3{color:#28638a}#documentPreview .completion-warning{border-top:1px solid #e3b65f;padding-top:10px;font-size:14px}
+#documentPreview table{width:100%;border-collapse:collapse;margin:12px 0;font-size:13px}
+#documentPreview th,#documentPreview td{border:1px solid #9eabb4;padding:7px;text-align:left;vertical-align:top}
+footer{max-width:1180px;margin:0 auto;padding:0 18px 30px;color:var(--muted);font-size:12px}
+@media(max-width:820px){.wrap{grid-template-columns:1fr}nav{position:static;display:grid;grid-template-columns:repeat(2,minmax(0,1fr))}nav strong{grid-column:1/-1}.grid{grid-template-columns:1fr}.checks{grid-template-columns:1fr}}
+@media print{body{background:white}.wrap,header,footer,#output .actions,#output .topline{display:none!important}#output{display:block!important;border:0;margin:0;padding:0}#documentPreview{max-width:none}#documentPreview h2{break-after:avoid}#documentPreview table{break-inside:avoid}}
+
+#startupChoice{position:fixed;inset:0;background:rgba(15,23,42,.58);display:none;align-items:center;justify-content:center;padding:20px;z-index:9999}
+#startupChoice .dialog{background:#fff;color:#1f2937;border-radius:16px;max-width:520px;width:100%;padding:26px;box-shadow:0 20px 60px rgba(0,0,0,.25)}
+#startupChoice h2{margin:0 0 10px;font-size:1.35rem;color:#17324d}
+#startupChoice p{line-height:1.5;color:#475569}
+#startupChoice .choice-actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:22px}
+#startupChoice button{flex:1;min-width:180px;padding:12px 16px;border-radius:9px;cursor:pointer;font-weight:600}
+#startupChoice .resume{background:#176b52;color:#fff;border:1px solid #176b52}
+#startupChoice .fresh{background:#fff;color:#334155;border:1px solid #94a3b8}
+
+.summary-panel{border:1px solid #cbd9e5;border-radius:12px;padding:18px;margin:18px 0 22px;background:#f8fbfd}.summary-panel h3{margin:0 0 8px;color:#17324d}.summary-list{display:grid;gap:8px;margin-top:14px}.summary-row{display:flex;justify-content:space-between;align-items:center;gap:14px;padding:11px 12px;background:#fff;border:1px solid #d8e2eb;border-radius:9px}.summary-row small{display:block;color:#586b7d;margin-top:4px}.summary-jump{white-space:nowrap;padding:7px 11px;font-size:.9em}@media(max-width:650px){.summary-row{align-items:flex-start;flex-direction:column}.summary-jump{align-self:flex-start}}
+
+.header-row{max-width:1180px;margin:0 auto;display:flex;justify-content:space-between;align-items:flex-start;gap:22px}.header-copy{min-width:0}.guide-open{flex:0 0 auto;margin-top:3px;border:1px solid rgba(255,255,255,.72);border-radius:9px;padding:10px 16px;background:rgba(255,255,255,.12);color:#fff;font:650 14px system-ui;cursor:pointer}.guide-open:hover{background:rgba(255,255,255,.22)}
+@media(max-width:650px){.header-row{flex-direction:column}.guide-open{align-self:flex-start}}
+#guideModal{position:fixed;inset:0;z-index:10000;display:none;align-items:center;justify-content:center;padding:18px;background:rgba(12,28,42,.66)}
+#guideModal.open{display:flex}
+#guideModal .guide-dialog{width:min(980px,100%);max-height:92vh;overflow:auto;background:#fff;border-radius:15px;box-shadow:0 24px 70px rgba(0,0,0,.3);padding:26px 30px;color:#243342}
+#guideModal .guide-head{display:flex;justify-content:space-between;align-items:flex-start;gap:16px;border-bottom:1px solid #d6e0e8;padding-bottom:14px;margin-bottom:18px}
+#guideModal h2{margin:0;color:#17324d;font-size:25px}#guideModal .guide-by{display:block;margin-top:3px;color:#637487;font-size:12px;font-style:italic;font-weight:400}
+#guideModal h3{color:#17324d;margin:22px 0 7px;font-size:18px}#guideModal p{margin:7px 0;line-height:1.58}#guideModal ol,#guideModal ul{padding-left:23px}#guideModal li{margin:7px 0;line-height:1.5}
+#guideModal .guide-close{border:1px solid #b8c8d5;border-radius:8px;background:white;color:#17324d;padding:8px 12px;font:600 13px system-ui;cursor:pointer;white-space:nowrap}
+#guideModal .guide-callout{padding:13px 15px;border-left:4px solid #3d8c70;background:#f0f7f4;border-radius:5px;margin:14px 0}
+#guideModal .guide-caution{padding:13px 15px;border-left:4px solid #d3a34b;background:#fff9ed;border-radius:5px;margin:14px 0}
+@media(max-width:650px){#guideModal .guide-dialog{padding:20px 17px}#guideModal .guide-head{flex-direction:column}#guideModal .guide-close{align-self:flex-end}}
+@media print{#guideModal{display:none!important}}
+
+
+/* Pagina introduttiva del progetto */
+#landingPage{min-height:100vh;background:linear-gradient(145deg,#edf4f8 0%,#f7f9fb 55%,#e8f0f5 100%);padding:0 22px 48px}
+.landing-top{max-width:1120px;margin:0 auto;padding:25px 0 18px;display:flex;justify-content:space-between;align-items:center;gap:18px}
+.landing-brand{color:#17324d;font-weight:750;letter-spacing:.02em}
+.landing-author{font-size:13px;color:#637487}
+.landing-hero{max-width:1120px;margin:26px auto 0;background:linear-gradient(120deg,#17324d,#285e80);color:#fff;border-radius:20px;padding:clamp(28px,5vw,58px);box-shadow:0 14px 36px #17324d20}
+.landing-kicker{text-transform:uppercase;letter-spacing:.12em;font-size:12px;font-weight:750;color:#c9dfed;margin:0 0 12px}
+.landing-hero h1{font-size:clamp(29px,4.2vw,46px);line-height:1.13;max-width:850px;margin:0 0 16px}
+.landing-hero .lead{font-size:clamp(16px,2vw,19px);line-height:1.65;max-width:900px;color:#e5eff5;margin:0}
+.landing-byline{margin-top:18px;font-size:14px;color:#d4e4ee;font-style:italic}
+.landing-content{max-width:1120px;margin:22px auto 0;display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.landing-card{background:#fff;border:1px solid #d6e0e8;border-radius:15px;padding:23px 25px;box-shadow:0 3px 12px #17324d08}
+.landing-card h2{margin:0 0 10px;color:#17324d;font-size:21px}
+.landing-card p{margin:0 0 10px;color:#42576b;line-height:1.65}
+.landing-card p:last-child{margin-bottom:0}
+.landing-principles{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px;margin-top:14px}
+.landing-principle{background:#f2f6f9;border:1px solid #e0e8ee;border-radius:9px;padding:10px 12px;color:#29465e;font-size:13px;font-weight:650}
+.landing-wide{grid-column:1/-1}
+.landing-cta{max-width:1120px;margin:22px auto 0;background:#fff;border:1px solid #d6e0e8;border-radius:15px;padding:22px 25px;display:flex;align-items:center;justify-content:space-between;gap:20px}
+.landing-cta p{margin:0;color:#42576b;line-height:1.55}
+.landing-enter{flex:0 0 auto;border:0;border-radius:10px;padding:15px 23px;background:#246b9e;color:#fff;font:750 16px system-ui;cursor:pointer;box-shadow:0 5px 14px #246b9e30}
+.landing-enter:hover{background:#1c587f}
+.landing-foot{max-width:1120px;margin:18px auto 0;color:#718293;font-size:12px;text-align:center}
+body:not(.generator-open) #landingPage{display:block}
+body:not(.generator-open)>header,body:not(.generator-open)>.wrap,body:not(.generator-open)>#output,body:not(.generator-open)>footer{display:none!important}
+body:not(.generator-open) #startupChoice{display:none!important}
+body.generator-open #landingPage{display:none}
+body.generator-open #startupChoice[style*="display: flex"]{display:flex!important}
+@media(max-width:760px){.landing-content{grid-template-columns:1fr}.landing-wide{grid-column:auto}.landing-cta{align-items:stretch;flex-direction:column}.landing-enter{width:100%}.landing-principles{grid-template-columns:1fr}}
+
+</style>
+</head>
+<body>
+
+<section id="landingPage" aria-labelledby="landingTitle">
+  <div class="landing-top">
+    <div class="landing-brand">PROGETTO PER LE ISTITUZIONI SCOLASTICHE</div>
+    <div class="landing-author">Un'iniziativa gratuita di Fabrizio Emer</div>
+  </div>
+  <div class="landing-hero">
+    <p class="landing-kicker">Scuola · Intelligenza artificiale · Governance</p>
+    <h1 id="landingTitle">Un progetto gratuito a disposizione delle istituzioni scolastiche</h1>
+    <p class="lead">Il Generatore di documenti per la governance dell'Intelligenza Artificiale nasce con l'obiettivo di offrire alle scuole uno strumento gratuito, accessibile e operativo per accompagnare la riflessione e la definizione delle regole relative all'impiego dell'IA nei contesti educativi.</p>
+    <p class="landing-byline">A cura di Fabrizio Emer</p>
+  </div>
+  <div class="landing-content">
+    <article class="landing-card">
+      <h2>Perché ho progettato questo strumento</h2>
+      <p>La diffusione dell'intelligenza artificiale sta interessando in modo crescente la didattica, l'organizzazione e i processi amministrativi delle istituzioni scolastiche. Le opportunità sono significative, ma richiedono consapevolezza, capacità di valutazione e criteri condivisi.</p>
+      <p>Ho ritenuto utile mettere a disposizione delle scuole uno strumento che trasformi indicazioni e principi generali in un percorso di lavoro concreto: un questionario guidato, articolato in dieci sezioni, che aiuti a raccogliere le decisioni dell'Istituto, individuare gli aspetti da approfondire e predisporre una prima bozza documentale.</p>
+      <p>L'intento non è fornire un regolamento standard da adottare automaticamente, ma facilitare un lavoro autonomo, ragionato e coerente con le caratteristiche di ciascuna comunità scolastica.</p>
+    </article>
+    <article class="landing-card">
+      <h2>Il quadro di riferimento del MIM</h2>
+      <p>Con il D.M. 9 agosto 2025, n. 166, il Ministero dell'Istruzione e del Merito ha adottato le <strong>Linee guida per l'introduzione dell'Intelligenza Artificiale nelle istituzioni scolastiche</strong>. Il documento offre un quadro di riferimento per accompagnare un'adozione consapevole e responsabile dell'IA e per governarne opportunità e rischi.</p>
+      <p>La finalità non è soltanto favorire l'innovazione. Il MIM richiama la necessità di tenere insieme potenzialità didattiche e organizzative, centralità della persona, tutela dei diritti, equità, sicurezza dei sistemi, trasparenza, robustezza tecnologica e protezione dei dati personali.</p>
+      <p>Le Linee guida propongono inoltre un percorso strutturato: analisi del contesto e dei bisogni, individuazione degli ambiti di applicazione, valutazione dei requisiti e dei rischi, attuazione, monitoraggio e governance.</p>
+    </article>
+    <article class="landing-card landing-wide">
+      <h2>I principi che orientano il progetto</h2>
+      <p>Il generatore riprende e traduce in scelte organizzative i principali orientamenti indicati dal Ministero, senza sostituirsi alle valutazioni e alle responsabilità dell'Istituto.</p>
+      <div class="landing-principles">
+        <div class="landing-principle">Centralità della persona</div>
+        <div class="landing-principle">Equità e inclusione</div>
+        <div class="landing-principle">Innovazione etica e responsabile</div>
+        <div class="landing-principle">Sostenibilità</div>
+        <div class="landing-principle">Sicurezza dei sistemi</div>
+        <div class="landing-principle">Tutela dei diritti e delle libertà fondamentali</div>
+      </div>
+    </article>
+    <article class="landing-card landing-wide">
+      <h2>Uno strumento di supporto, non un adempimento automatico</h2>
+      <p>Le Linee guida del MIM non impongono indistintamente a tutte le scuole l'adozione di un documento autonomo con una denominazione prestabilita. Indicano, tuttavia, un quadro di principi, requisiti e indicazioni operative da considerare quando l'istituzione scolastica introduce e utilizza sistemi di IA.</p>
+      <p>Il generatore aiuta a organizzare questa riflessione e a predisporre una bozza personalizzabile. Il testo prodotto deve essere verificato, completato e adattato dalla scuola, anche con il coinvolgimento delle figure competenti e degli organi collegiali secondo le procedure dell'Istituto.</p>
+    </article>
+    <article class="landing-card landing-wide">
+      <h2>Licenza e condizioni di utilizzo</h2>
+      <p><strong>Testi della presentazione e documentazione:</strong> sono messi a disposizione con licenza <strong>Creative Commons Attribuzione – Non Commerciale – Non Opere Derivate 4.0 Internazionale (CC BY-NC-ND 4.0)</strong>. È consentita la condivisione dei materiali originali, senza modifiche, per finalità non commerciali e con attribuzione a Fabrizio Emer.</p>
+      <p><strong>Generatore e codice software:</strong> restano protetti dal diritto d'autore e non sono concessi in licenza Creative Commons. L'autore ne consente gratuitamente l'utilizzo alle istituzioni scolastiche per finalità non commerciali. Non è autorizzata la distribuzione di copie modificate, la rimozione dei riferimenti all'autore o la commercializzazione del programma senza preventiva autorizzazione scritta.</p>
+      <p>Le scuole possono compilare il generatore, salvare i propri dati e modificare liberamente i documenti prodotti. Le condizioni non limitano la personalizzazione dei regolamenti elaborati con lo strumento.</p>
+      <p><a href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank" rel="noopener">Consulta il testo ufficiale della licenza CC BY-NC-ND 4.0</a>.</p>
+    </article>
+    <article class="landing-card landing-wide">
+      <h2>Un progetto gratuito e aperto al confronto</h2>
+      <p>Il progetto promuove un approccio consapevole, responsabile e partecipato, mettendo a disposizione un ambiente di lavoro che aiuta le istituzioni scolastiche a elaborare documenti coerenti con il proprio contesto e con il quadro normativo di riferimento.</p>
+      <p>Lo strumento è distribuito gratuitamente, senza finalità commerciali, e intende contribuire alla diffusione di una cultura dell'innovazione responsabile nella scuola.</p>
+      <p>Segnalazioni, proposte di miglioramento e richieste di integrazione possono essere inviate all'autore: <a href="mailto:fabrizio.emer@gmail.com?subject=Generatore%20IA%20per%20le%20scuole">fabrizio.emer@gmail.com</a>.</p>
+    </article>
+  </div>
+  <div class="landing-cta">
+    <p><strong>Pronto per iniziare?</strong><br>Accedi al questionario guidato e costruisci la bozza in base alle esigenze della tua istituzione scolastica.</p>
+    <button type="button" class="landing-enter" onclick="enterGenerator()">Accedi al generatore →</button>
+  </div>
+  <div class="landing-foot">Generatore di documenti per la governance dell'Intelligenza Artificiale · Progetto gratuito · A cura di Fabrizio Emer</div>
+</section>
+
+<div id="startupChoice" role="dialog" aria-modal="true" aria-labelledby="startupTitle">
+  <div class="dialog">
+    <h2 id="startupTitle">È presente una compilazione precedente</h2>
+    <p>Puoi riprendere il lavoro salvato in questo browser oppure iniziare una nuova compilazione. Se scegli una nuova compilazione, i dati precedenti verranno sostituiti.</p>
+    <div class="choice-actions">
+      <button type="button" class="resume" onclick="resumePrevious()">Riprendi compilazione</button>
+      <button type="button" class="fresh" onclick="startFreshFromWelcome()">Avvia nuova compilazione</button>
+    </div>
+  </div>
+</div>
+<div id="guideModal" role="dialog" aria-modal="true" aria-labelledby="guideTitle" onclick="if(event.target===this)closeGuide()">
+ <div class="guide-dialog">
+  <div class="guide-head"><div><h2 id="guideTitle">Guida al generatore di Regolamento scolastico per l'IA</h2><span class="guide-by">a cura di Fabrizio Emer</span></div><button type="button" class="guide-close" onclick="closeGuide()">Chiudi ✕</button></div>
+  <p>Questo strumento accompagna l'Istituto nella raccolta delle informazioni e delle decisioni necessarie per predisporre una <strong>bozza</strong> di regolamento scolastico sull'utilizzo dell'intelligenza artificiale, con codice di condotta e allegati operativi. Il questionario organizza il lavoro: le scelte restano in capo agli organi e ai soggetti competenti della scuola.</p>
+  <div class="guide-callout"><strong>Come usare la guida:</strong> è consultabile in ogni momento con il pulsante «Guida» in alto a destra. La sua apertura non cancella né modifica le risposte inserite.</div>
+  <h3>Prima di iniziare: che cosa è richiesto alle scuole?</h3>
+  <p>È utile distinguere gli obblighi relativi all'uso corretto e sicuro dei sistemi di Intelligenza Artificiale dall'adozione di uno specifico documento. Il D.M. MIM 9 agosto 2025, n. 166, e le Linee guida allegate non stabiliscono un obbligo generalizzato per tutte le istituzioni scolastiche di redigere un documento autonomo denominato «Piano di utilizzo dell'IA» o «Regolamento IA», né di pubblicarlo sul sito con tale denominazione.</p>
+  <p>Le Linee guida indicano però che ciascuna istituzione scolastica che intende introdurre sistemi di IA deve analizzare il proprio contesto, individuare bisogni e aree di applicazione e rispettare i principi e i requisiti etici, tecnici e normativi applicabili. Restano quindi necessari, quando pertinenti, gli adempimenti previsti dalla normativa, ad esempio in materia di protezione dei dati personali, sicurezza, trasparenza e gestione dei rischi.</p>
+  <p>La scuola può scegliere, nell'ambito della propria autonomia e secondo le competenze degli organi coinvolti, come formalizzare le proprie decisioni: ad esempio mediante un regolamento, una policy, un piano organizzativo oppure l'integrazione di disposizioni negli atti già esistenti. La scelta di un documento autonomo è una modalità organizzativa, non va presentata come un obbligo generalizzato imposto dal D.M. 166/2025.</p>
+  <p>Questo generatore prepara una <strong>bozza di regolamento</strong> adattabile al contesto dell'Istituto. Non presuppone che ogni scuola debba necessariamente adottare proprio questo tipo di documento. La collocazione (parte integrante del Regolamento d'Istituto, appendice o documento autonomo) può essere selezionata nella prima sezione.</p>
+  <p><strong>Riferimento:</strong> D.M. MIM 9 agosto 2025, n. 166, «Linee guida per l'introduzione dell'Intelligenza Artificiale nelle Istituzioni scolastiche», in particolare paragrafo 4.1 («Istruzioni operative e strumenti di accompagnamento»), disponibile sul sito del Ministero dell'Istruzione e del Merito.</p>
+  <h3>1. Le dieci sezioni del questionario</h3>
+  <ol>
+   <li><strong>Identità e contesto dell'istituto.</strong> Raccoglie denominazione, tipologia, codice, sede, anno scolastico, riferimenti istituzionali e dati che identificano la scuola nel documento. Qui si può anche inserire e dimensionare l'immagine dell'intestazione.</li>
+   <li><strong>Governance e responsabilità.</strong> Definisce ruoli, referenti, compiti e modalità organizzative per proporre, valutare, autorizzare, monitorare e aggiornare gli utilizzi dell'IA.</li>
+   <li><strong>Finalità e principi.</strong> Consente di esplicitare le finalità istituzionali e i principi che orientano l'adozione e l'impiego degli strumenti di IA.</li>
+   <li><strong>Utilizzi e regole operative.</strong> Raccoglie le disposizioni per docenti, personale ATA e attività scolastiche: ambiti ammessi, condizioni, limiti e modalità di controllo umano.</li>
+   <li><strong>Studenti e famiglie.</strong> Riguarda gli utilizzi da parte degli studenti, le condizioni legate all'età e agli account, le attività e i lavori degli alunni, l'informazione e il coinvolgimento delle famiglie.</li>
+   <li><strong>Privacy, sicurezza e gestione dei rischi.</strong> Organizza le indicazioni su titolarità del trattamento, DPO/RPD, valutazione preventiva, dati, sicurezza, conservazione e documentazione. Non sostituisce le valutazioni e gli adempimenti propri dei soggetti competenti.</li>
+   <li><strong>Registro delle piattaforme e degli strumenti IA.</strong> Permette di censire più strumenti, indicando per ciascuno ambito, utenti, finalità, accesso/account, stato e verifica privacy/fornitore. Le informazioni alimentano il registro allegato al regolamento.</li>
+   <li><strong>Formazione, codice di condotta e gestione delle segnalazioni.</strong> Raccoglie le iniziative formative, le regole di comportamento e i canali e destinatari delle segnalazioni di problemi o incidenti connessi all'IA.</li>
+   <li><strong>Approvazione, entrata in vigore e revisione.</strong> Riporta gli organi competenti, i riferimenti della versione, l'iter di approvazione, la decorrenza e le modalità/tempi di aggiornamento.</li>
+   <li><strong>Verifica e generazione del documento.</strong> Riunisce il controllo preliminare, il riepilogo delle segnalazioni e gli strumenti per generare la bozza da esaminare prima dell'eventuale approvazione.</li>
+  </ol>
+  <h3>2. Compilazione in itinere: si può procedere a più riprese</h3>
+  <p>Non è necessario completare il questionario in un'unica sessione. È possibile compilare una o più sezioni, interrompere il lavoro e riprenderlo successivamente dallo stesso browser e dallo stesso dispositivo.</p>
+  <ul>
+   <li><strong>Salvataggio automatico:</strong> le modifiche vengono salvate localmente nel browser dopo una breve pausa dall'inserimento. L'indicatore nella parte alta del questionario mostra lo stato del salvataggio.</li>
+   <li><strong>Ripresa:</strong> quando si riapre il generatore, se è presente una compilazione precedente viene proposta la scelta tra «Riprendi compilazione» e «Avvia nuova compilazione».</li>
+   <li><strong>Esportazione di sicurezza:</strong> usare «Esporta dati» per scaricare una copia JSON della compilazione. Il file può essere conservato come backup e reimportato con «Importa dati».</li>
+   <li><strong>Nuova compilazione:</strong> il comando dedicato pulisce i campi e i dati della compilazione corrente nel browser, dopo richiesta di conferma.</li>
+  </ul>
+  <div class="guide-caution"><strong>Attenzione:</strong> il salvataggio automatico è locale. Non equivale a una sincronizzazione online e non trasferisce i dati tra computer o browser diversi. Per conservare il lavoro, esportare periodicamente il file JSON e custodirlo in un luogo sicuro.</div>
+  <h3>3. Generare e stampare la bozza in PDF</h3>
+  <ol>
+   <li>Aprire la sezione 10 «Verifica e generazione del documento» e consultare il controllo preliminare e il riepilogo delle sezioni.</li>
+   <li>Selezionare «Genera bozza» per produrre l'anteprima del regolamento e dei relativi allegati. La bozza può essere generata anche se alcuni dati sono ancora mancanti: i punti incompleti vengono evidenziati nel documento con la dicitura «DA COMPLETARE» e con un promemoria riepilogativo.</li>
+   <li>Nell'area dell'anteprima premere «Stampa / Salva PDF». Nella finestra di stampa del browser scegliere come destinazione «Salva come PDF», verificare formato, orientamento e margini, quindi salvare il file.</li>
+  </ol>
+  <p>La stampa PDF riguarda il documento generato e la sua anteprima, non il questionario compilabile. Per ottenere una nuova versione PDF dopo eventuali modifiche, generare nuovamente la bozza e ripetere la stampa.</p>
+  <h3>4. Controlli di qualità formale</h3>
+  <p>Il controllo preliminare verifica alcuni elementi di completezza e coerenza redazionale delle risposte. Le segnalazioni sono suddivise in tre livelli, con conteggio, descrizione e collegamento alla sezione interessata.</p>
+  <ul>
+   <li><strong>Bloccanti per la finalizzazione.</strong> Evidenziano informazioni considerate indispensabili per identificare e contestualizzare correttamente il documento: denominazione dell'istituto, tipologia, anno scolastico, dirigente scolastico, titolare del trattamento, organi di approvazione e versione del regolamento. Sono elementi da completare prima di considerare il testo pronto per la finalizzazione. <strong>Non impediscono la generazione della bozza.</strong></li>
+   <li><strong>Attenzioni da verificare.</strong> Segnalano decisioni o verifiche ancora aperte: individuazione del referente IA o di un'alternativa organizzativa; riferimento DPO/RPD; destinatario delle segnalazioni; regole per docenti e studenti; condizioni per fasce d'età quando è previsto l'uso da parte degli studenti; informazione alle famiglie; valutazione preventiva degli strumenti. Per le piattaforme autorizzate, il sistema richiama anche verifiche privacy/fornitore non concluse o schede prive di utenti, finalità o modalità di accesso. Evidenzia inoltre piattaforme proposte o con verifica ancora da svolgere.</li>
+   <li><strong>Suggerimenti facoltativi.</strong> Invitano a valutare integrazioni che possono rendere il documento più completo: esplicitazione di finalità e principi, censimento delle piattaforme, descrizione della valutazione dei rischi e dell'eventuale raccordo con il DVR, attenzione al benessere degli studenti, personalizzazione delle regole PEI/PDP, formazione e periodicità della revisione. Non sono blocchi e non equivalgono automaticamente a obblighi.</li>
+  </ul>
+  <p><strong>Aggiornamento durante la compilazione:</strong> il controllo viene ricalcolato quando si accede alla sezione 10. Le segnalazioni sono associate alle sezioni e il riepilogo consente di tornare direttamente ai campi da rivedere. Nella sezione 10 i conteggi e le segnalazioni vengono aggiornati quando si modificano le risposte.</p>
+  <div class="guide-caution"><strong>Limiti del controllo:</strong> si tratta di verifiche formali e redazionali basate sui dati inseriti, non di una certificazione di conformità. Non sostituisce l'esame giuridico, amministrativo, privacy, tecnico e di sicurezza, né le valutazioni del Dirigente, del DPO/RPD, degli organi collegiali e delle altre figure competenti. L'assenza di segnalazioni non significa che il regolamento sia automaticamente corretto o approvabile.</div>
+  <h3>5. Prima dell'approvazione</h3>
+  <p>La bozza generata deve essere letta, verificata e adattata dall'Istituto. Occorre controllare che le scelte riportate corrispondano alle decisioni effettivamente assunte, completare i campi residui, verificare i riferimenti normativi e gli allegati e sottoporre il testo agli organi e alle figure competenti secondo le procedure della scuola.</p>
+  <h3>6. Contatti, segnalazioni e proposte di miglioramento</h3>
+  <p>Il generatore è messo gratuitamente a disposizione delle istituzioni scolastiche. Per segnalare problemi, proporre miglioramenti, richiedere modifiche o integrazioni e suggerire nuove funzionalità è possibile contattare direttamente l'autore.</p>
+  <p><strong>Fabrizio Emer</strong><br>Autore e sviluppatore del progetto<br>Email: <a href="mailto:fabrizio.emer@gmail.com?subject=Generatore%20di%20Regolamento%20scolastico%20per%20l'IA">fabrizio.emer@gmail.com</a></p>
+  <p>Le richieste e le proposte saranno valutate in vista di eventuali aggiornamenti del generatore. L'invio di una proposta non comporta l'automatica realizzazione o l'inserimento della modifica.</p>
+  <h3>Licenza e condizioni di utilizzo</h3>
+  <p>I testi della pagina introduttiva e la documentazione del progetto sono distribuiti con licenza <strong>Creative Commons Attribuzione – Non Commerciale – Non Opere Derivate 4.0 Internazionale (CC BY-NC-ND 4.0)</strong>. È consentita la condivisione dei materiali originali, senza modifiche, per finalità non commerciali e con attribuzione a Fabrizio Emer. <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank" rel="noopener">Consulta la licenza ufficiale</a>.</p>
+  <p>Il generatore HTML e il relativo codice software non sono invece rilasciati con licenza Creative Commons: restano protetti dal diritto d'autore. È consentito alle istituzioni scolastiche l'utilizzo gratuito per finalità non commerciali. Non è autorizzata la distribuzione di versioni modificate, la rimozione dei riferimenti all'autore o la commercializzazione del programma senza preventiva autorizzazione scritta.</p>
+  <p>Le scuole possono utilizzare il questionario, salvare i propri dati e modificare liberamente i documenti generati. Le condizioni di utilizzo del programma non limitano la personalizzazione dei regolamenti prodotti.</p>
+
+ </div>
+</div>
+<header>
+<div class="header-row"><div class="header-copy">
+<h1>Generatore di Regolamento scolastico per l'IA</h1>
+<p>Questionario guidato per raccogliere le decisioni dell'istituto e generare una bozza di regolamento, codice di condotta e allegati operativi. Compilazione modulare, salvataggio locale e documento modificabile.</p>
+<p style="margin-top:6px;font-size:.82em;font-style:italic;opacity:.88">A cura di Fabrizio Emer</p>
+</div><button type="button" class="guide-open" onclick="openGuide()" aria-haspopup="dialog" aria-controls="guideModal">Guida</button></div>
+</header>
+<div class="wrap">
+<nav>
+<strong>Percorso di compilazione</strong>
+<button class="active" data-step="0">1. Identità e contesto</button>
+<button data-step="1">2. Governance e responsabilità</button>
+<button data-step="2">3. Finalità e principi</button>
+<button data-step="3">4. Utilizzi e regole</button>
+<button data-step="4">5. Studenti e famiglie</button>
+<button data-step="5">6. Privacy e sicurezza</button>
+<button data-step="6">7. Piattaforme IA</button>
+<button data-step="7">8. Formazione e segnalazioni</button>
+<button data-step="8">9. Approvazione e revisione</button>
+<button data-step="9">10. Verifica finale</button>
+</nav>
+<main>
+<div class="panel">
+<div class="topline"><span id="stepLabel">Sezione 1 di 10</span><span id="saveState">Nuova compilazione</span><button class="secondary danger" type="button" onclick="newCompilation()">Nuova compilazione / Pulisci campi</button></div>
+<div class="progress"><span id="progressBar"></span></div>
+
+<section class="section active" data-section="0">
+<h2>Identità e contesto dell'istituto</h2><p class="intro">Dati identificativi che compariranno nell'intestazione e nelle disposizioni iniziali.</p>
+<div class="field full" style="border:1px solid var(--line);border-radius:12px;padding:16px;margin:14px 0 20px;background:#fbfdff">
+<label for="schoolHeaderFile">Intestazione personalizzata della scuola (facoltativa)</label>
+<p class="help">Carica il logo o l'immagine dell'intestazione ufficiale della scuola. Sarà inserita nella parte alta del frontespizio. Formati supportati: PNG, JPG o WebP; dimensione massima 2 MB.</p>
+<div class="actions" style="margin:10px 0"><label class="secondary" style="cursor:pointer">＋ Inserisci intestazione <input id="schoolHeaderFile" type="file" accept="image/png,image/jpeg,image/webp" style="display:none" onchange="loadSchoolHeader(event)"></label><button class="secondary danger" id="removeSchoolHeader" type="button" onclick="removeSchoolHeader()" style="display:none">Rimuovi intestazione</button></div>
+<div id="schoolHeaderResize" style="display:none;margin:12px 0;padding:12px;background:#f7fafc;border:1px solid #d5e0e9;border-radius:8px"><label for="schoolHeaderWidth"><strong>Dimensione dell'intestazione</strong> – <span id="schoolHeaderWidthValue">100%</span></label><input id="schoolHeaderWidth" type="range" min="50" max="150" step="1" value="100" style="width:100%;accent-color:#2875a8" oninput="setSchoolHeaderWidth(this.value)"><div class="help">Riduci o ingrandisci la larghezza dell'immagine nel frontespizio (dal 50% al 150%). Il valore iniziale del 100% è al centro del cursore; l'immagine mantiene le proprie proporzioni.</div></div>
+<div id="schoolHeaderPreview" style="display:none;margin-top:10px;padding:12px;background:white;border:1px dashed #b9c9d8;border-radius:8px;text-align:center"><img id="schoolHeaderPreviewImg" alt="Anteprima intestazione della scuola" style="max-width:none;max-height:none;height:auto;width:100%;object-fit:contain;display:block;margin:0 auto"><div class="help">Anteprima dell'immagine che comparirà sul frontespizio.</div></div>
+</div>
+<div class="grid">
+<div class="field full"><label>Denominazione ufficiale dell'istituto</label><input id="school" placeholder="Es. Istituto Comprensivo ..."></div>
+<div class="field"><label>Tipologia di istituto</label><select id="institutionType"><option value="" selected>— Seleziona —</option><option>Istituto comprensivo</option><option>Scuola dell’infanzia</option><option>Scuola primaria</option><option>Scuola secondaria di primo grado</option><option>Liceo</option><option>Istituto tecnico</option><option>Istituto professionale</option><option>Centro provinciale per l’istruzione degli adulti</option><option>Altro</option></select></div>
+<div class="field"><label>Ordine/i di scuola</label><select id="schoolType" multiple size="4"><option>Infanzia</option><option>Primaria</option><option>Secondaria di I grado</option><option>Secondaria di II grado</option><option>Centro provinciale per l'istruzione degli adulti</option></select><small class="help">È possibile selezionare più ordini (Ctrl/Cmd + clic).</small></div>
+<div class="field"><label>Codice meccanografico</label><input id="code"></div>
+<div class="field"><label>Indirizzo della sede</label><input id="address"></div>
+<div class="field"><label>Comune e provincia</label><input id="city"></div>
+<div class="field"><label>Email istituzionale</label><input id="email" type="email"></div>
+<div class="field"><label>PEC</label><input id="pec" type="email"></div>
+<div class="field"><label>Sito web</label><input id="website"></div>
+<div class="field"><label>Dirigente scolastico</label><input id="principal"></div>
+<div class="field"><label>Anno scolastico di riferimento</label><input id="year" placeholder="2026/2027"></div>
+<div class="field"><label>Collocazione del regolamento</label><select id="placement"><option>Parte integrante del Regolamento d'Istituto</option><option>Appendice al Regolamento d'Istituto</option><option>Documento autonomo</option><option>Da definire</option></select></div>
+<div class="field"><label>Denominazione del documento</label><input id="docTitle" value="Regolamento per l'utilizzo dell'Intelligenza Artificiale"></div>
+<div class="field full"><label>Riferimenti normativi nazionali da includere nel regolamento</label><div class="checks" id="nationalLaws">
+<label class="check"><input type="checkbox" value="Legge 23 settembre 2025, n. 132 – Disposizioni e deleghe al Governo in materia di intelligenza artificiale">Legge 23 settembre 2025, n. 132 – Legge italiana sull'IA</label>
+<label class="check"><input type="checkbox" value="Decreto del Ministro dell'istruzione e del merito 9 agosto 2025, n. 166, recante le Linee guida per l'introduzione dell'Intelligenza Artificiale nelle istituzioni scolastiche">D.M. MIM 9 agosto 2025, n. 166 – Linee guida IA per le scuole</label>
+<label class="check"><input type="checkbox" value="D.P.R. 24 giugno 1998, n. 249 – Statuto delle studentesse e degli studenti, come modificato dal D.P.R. 21 novembre 2007, n. 235">D.P.R. 249/1998 – Statuto delle studentesse e degli studenti</label>
+<label class="check"><input type="checkbox" value="D.P.R. 16 aprile 2013, n. 62 – Codice di comportamento dei dipendenti pubblici, come modificato dal D.P.R. 13 giugno 2023, n. 81">D.P.R. 62/2013 – Codice di comportamento dei dipendenti pubblici</label>
+</div><small class="help">I riferimenti europei AI Act e GDPR restano già richiamati nella premessa. Selezionare i riferimenti nazionali pertinenti al contesto dell'istituto e verificarne l'applicabilità.</small></div>
+<div class="field full"><label>Raccordo con gli atti strategici e di corresponsabilità della scuola</label><div class="checks" id="strategicActs">
+<label class="check"><input type="checkbox" value="Patto Educativo di Corresponsabilità">Il regolamento è raccordato al Patto Educativo di Corresponsabilità</label>
+<label class="check"><input type="checkbox" value="Piano di Miglioramento (PDM)">Il regolamento è raccordato al Piano di Miglioramento (PDM)</label>
+</div><small class="help">La selezione indica un raccordo da formalizzare negli atti della scuola. L'eventuale aggiornamento del Patto e delle regole disciplinari segue le procedure e le competenze previste: la sola selezione non introduce automaticamente obblighi o sanzioni.</small></div>
+</div></section>
+
+<section class="section" data-section="1">
+<h2>Governance e responsabilità</h2><p class="intro">Definire chi propone, valuta, autorizza, monitora e aggiorna l'uso dell'IA.</p>
+<div class="grid">
+<div class="field"><label>È istituito un gruppo di lavoro / commissione IA?</label><select id="group"><option value="Sì">Sì</option><option value="No">No</option><option value="Da istituire">Da istituire</option></select></div>
+<div class="field"><label>Denominazione del gruppo</label><input id="groupName" value="Gruppo di lavoro per l'Intelligenza Artificiale"></div>
+<div class="field full"><label>Componenti previsti</label><div class="checks" id="members">
+<label class="check"><input type="checkbox" value="Dirigente scolastico">Dirigente scolastico</label>
+<label class="check"><input type="checkbox" value="Direttore SGA">Direttore SGA</label>
+<label class="check"><input type="checkbox" value="Animatore digitale">Animatore digitale</label>
+<label class="check"><input type="checkbox" value="Referente IA">Referente IA</label>
+<label class="check"><input type="checkbox" value="DPO/RPD">DPO/RPD</label>
+<label class="check"><input type="checkbox" value="Docenti">Docenti</label>
+<label class="check"><input type="checkbox" value="Personale ATA">Personale ATA</label>
+<label class="check"><input type="checkbox" value="RSPP">RSPP</label>
+<label class="check"><input type="checkbox" value="Referente per la sicurezza informatica">Referente sicurezza informatica</label>
+<label class="check"><input type="checkbox" value="Rappresentanti delle famiglie">Rappresentanti famiglie</label>
+</div></div>
+<div class="field full"><label>Compiti del gruppo di lavoro</label><div class="checks" id="duties">
+<label class="check"><input type="checkbox" value="Istruttoria delle proposte di adozione">Istruttoria delle proposte di adozione</label>
+<label class="check"><input type="checkbox" value="Ricognizione e aggiornamento delle piattaforme">Ricognizione piattaforme</label>
+<label class="check"><input type="checkbox" value="Analisi preliminare dei rischi">Analisi preliminare dei rischi</label>
+<label class="check"><input type="checkbox" value="Proposta di misure organizzative e formative">Misure organizzative e formative</label>
+<label class="check"><input type="checkbox" value="Monitoraggio dell'applicazione del regolamento">Monitoraggio</label>
+<label class="check"><input type="checkbox" value="Proposta di revisione del regolamento">Proposta di revisione</label>
+</div></div>
+<div class="field"><label>Chi autorizza l'adozione degli strumenti?</label><select id="authorizer"><option>Dirigente scolastico, secondo le competenze degli organi collegiali</option><option>Dirigente scolastico previa istruttoria del gruppo IA</option><option>Organo collegiale competente, secondo materia</option><option>Procedura interna da definire</option></select></div>
+<div class="field"><label>Referente per le segnalazioni</label><input id="incidentContact" placeholder="Ruolo o ufficio destinatario"></div>
+<div class="field"><label>Referente per l’IA</label><input id="aiReferent" placeholder="Nome, ruolo o funzione"></div>
+<div class="field full"><label>Compiti del referente per l’IA</label><textarea id="aiReferentDuties" placeholder="Es. coordinamento delle proposte, supporto ai docenti, raccordo con il gruppo di lavoro, monitoraggio del registro e proposta di aggiornamento..."></textarea></div>
+<div class="field full"><label>Ulteriori ruoli, deleghe o precisazioni</label><textarea id="governanceNotes"></textarea></div>
+<div class="field full"><label>Valutazione dei rischi per il personale e aggiornamento del DVR</label><textarea id="dvrReview" placeholder="Indicare se e come il datore di lavoro, con il supporto del RSPP e il coinvolgimento delle figure previste, valuta eventuali nuovi rischi connessi all’introduzione dell’IA e l’eventuale aggiornamento del DVR: carico cognitivo, intensificazione dei ritmi, tecnostress, cambiamenti organizzativi e necessità formative."></textarea><small class="help">La valutazione riguarda salute e sicurezza dei lavoratori; non sostituisce la valutazione del datore di lavoro prevista dal D.Lgs. 81/2008.</small></div>
+</div></section>
+
+<section class="section" data-section="2">
+<h2>Finalità e principi</h2><p class="intro">Selezionare le finalità istituzionali e i principi che guideranno ogni utilizzo.</p>
+<div class="field full"><label>Finalità dell'utilizzo dell'IA</label><div class="checks" id="goals">
+<label class="check"><input type="checkbox" value="Supportare la progettazione didattica e la preparazione dei materiali">Progettazione e materiali didattici</label>
+<label class="check"><input type="checkbox" value="Favorire personalizzazione, inclusione e accessibilità">Inclusione e personalizzazione</label>
+<label class="check"><input type="checkbox" value="Sviluppare competenze digitali e alfabetizzazione all'IA">AI literacy e competenze digitali</label>
+<label class="check"><input type="checkbox" value="Promuovere pensiero critico, creatività e autonomia">Pensiero critico e creatività</label>
+<label class="check"><input type="checkbox" value="Supportare processi organizzativi e amministrativi">Processi organizzativi e amministrativi</label>
+<label class="check"><input type="checkbox" value="Migliorare accessibilità e comunicazione">Accessibilità e comunicazione</label>
+<label class="check"><input type="checkbox" value="Favorire ricerca, sperimentazione e innovazione">Ricerca e innovazione</label>
+</div></div>
+<div class="field full"><label>Principi da richiamare nel regolamento</label><div class="checks" id="principles">
+<label class="check"><input type="checkbox" value="Centralità della persona e dignità umana">Centralità della persona</label>
+<label class="check"><input type="checkbox" value="Legalità e conformità normativa">Legalità e conformità</label>
+<label class="check"><input type="checkbox" value="Trasparenza e informazione">Trasparenza</label>
+<label class="check"><input type="checkbox" value="Supervisione e responsabilità umana">Supervisione umana</label>
+<label class="check"><input type="checkbox" value="Equità, inclusione e non discriminazione">Equità e inclusione</label>
+<label class="check"><input type="checkbox" value="Protezione dei dati e riservatezza">Privacy e riservatezza</label>
+<label class="check"><input type="checkbox" value="Sicurezza e affidabilità">Sicurezza e affidabilità</label>
+<label class="check"><input type="checkbox" value="Proporzionalità e gestione del rischio">Proporzionalità e gestione del rischio</label>
+<label class="check"><input type="checkbox" value="Autonomia, pensiero critico e integrità intellettuale">Autonomia e pensiero critico</label>
+<label class="check"><input type="checkbox" value="Sostenibilità ambientale e uso proporzionato delle risorse computazionali">Sostenibilità ambientale e uso proporzionato delle risorse</label>
+</div></div>
+<div class="field full"><label>Documenti interni con cui coordinare il regolamento</label><textarea id="relatedDocs" placeholder="Es. PTOF, Regolamento d'Istituto, Patto educativo di corresponsabilità, policy privacy, regolamento BYOD, piano sicurezza informatica..."></textarea></div>
+</section>
+
+<section class="section" data-section="3">
+<h2>Utilizzi e regole operative</h2><p class="intro">Definire le regole per docenti, personale ATA e studenti. Le scelte vengono riportate nel documento come disposizioni dell'istituto.</p>
+<div class="grid">
+<div class="field"><label>Uso da parte dei docenti</label><select id="teacherUse"><option value="" selected>— Seleziona —</option><option>Consentito per supporto didattico, con verifica e responsabilità del docente</option><option>Consentito solo con strumenti autorizzati dall'istituto</option><option>Consentito previa autorizzazione caso per caso</option><option>Limitato alle attività formative e sperimentali</option></select></div>
+<div class="field"><label>Uso da parte del personale ATA</label><select id="ataUse"><option value="" selected>— Seleziona —</option><option>Consentito per attività di supporto, previa autorizzazione e senza dati personali non autorizzati</option><option>Consentito solo con strumenti istituzionali autorizzati</option><option>Sospeso fino a specifica procedura interna</option><option>Da definire</option></select></div>
+<div class="field"><label>Uso da parte degli studenti</label><select id="studentUse"><option value="" selected>— Seleziona —</option><option>Consentito per attività didattiche indicate o guidate dal docente</option><option>Consentito solo in attività esplicitamente autorizzate</option><option>Consentito con strumenti selezionati e account gestiti dalla scuola</option><option>Non consentito nell'ambito scolastico, salvo progetti autorizzati</option></select></div>
+<div class="field"><label>Uso durante verifiche e prove valutative</label><select id="assessment"><option value="" selected>— Seleziona —</option><option>Solo se esplicitamente autorizzato dal docente e secondo criteri dichiarati</option><option>Non consentito, salvo attività specificamente progettate</option><option>Consentito secondo le indicazioni definite per ciascuna prova</option></select></div>
+<div class="field"><label>Uso per valutazione e attribuzione dei voti</label><select id="grading"><option value="" selected>— Seleziona —</option><option>Mai in modo autonomo; il giudizio resta al docente</option><option>Solo come supporto non determinante, con verifica umana</option><option>Escluso fino a valutazione e autorizzazione specifica</option></select></div>
+<div class="field"><label>Uso per attività amministrative</label><select id="adminUse"><option value="" selected>— Seleziona —</option><option>Consentito solo per compiti di supporto, con strumenti autorizzati e controllo umano</option><option>Consentito esclusivamente su dati non personali o anonimizzati</option><option>Sospeso fino all'adozione di una procedura dedicata</option></select></div>
+<div class="field full"><label>Attività dei docenti per cui è previsto l’utilizzo dell’IA</label><div class="checks" id="teacherActivities">
+<label class="check"><input type="checkbox" value="Preparazione di lezioni e unità di apprendimento">Preparazione di lezioni e UDA</label>
+<label class="check"><input type="checkbox" value="Produzione e adattamento di materiali didattici">Produzione e adattamento di materiali</label>
+<label class="check"><input type="checkbox" value="Creazione di immagini, audio e video">Creazione di immagini, audio e video</label>
+<label class="check"><input type="checkbox" value="Personalizzazione e inclusione">Personalizzazione e inclusione</label>
+<label class="check"><input type="checkbox" value="Preparazione di verifiche e prove">Preparazione di verifiche e prove</label>
+<label class="check"><input type="checkbox" value="Supporto alla correzione, con decisione finale del docente">Supporto alla correzione, con decisione finale del docente</label>
+<label class="check"><input type="checkbox" value="Valutazione formativa e feedback">Valutazione formativa e feedback</label>
+</div><small class="help">La selezione descrive gli ambiti ammessi o previsti dall’istituto; non autorizza decisioni automatizzate né sostituisce la valutazione professionale del docente.</small></div>
+<div class="field full"><label>Regole su dichiarazione e tracciabilità dell'uso dell'IA</label><textarea id="disclosure" placeholder="Indicare quando e come docenti e studenti devono dichiarare l'uso dell'IA (strumento, finalità, contributo, verifiche effettuate)."></textarea></div>
+<div class="field full"><label>Usi vietati o da sottoporre a valutazione specifica</label><div class="checks" id="prohibitions">
+<label class="check"><input type="checkbox" value="Decisioni esclusivamente automatizzate con effetti su studenti o personale">Decisioni automatizzate con effetti sulle persone</label>
+<label class="check"><input type="checkbox" value="Profilazione o previsione del rendimento o del comportamento degli studenti">Profilazione e predizione studenti</label>
+<label class="check"><input type="checkbox" value="Riconoscimento o inferenza delle emozioni in ambito scolastico">Riconoscimento delle emozioni</label>
+<label class="check"><input type="checkbox" value="Sorveglianza occulta o monitoraggio comportamentale non autorizzato">Sorveglianza occulta</label>
+<label class="check"><input type="checkbox" value="Inserimento di dati personali o riservati in servizi non autorizzati">Caricamento di dati riservati</label>
+<label class="check"><input type="checkbox" value="Produzione o diffusione di deepfake lesivi o ingannevoli">Deepfake lesivi o ingannevoli</label>
+<label class="check"><input type="checkbox" value="Uso non dichiarato dell'IA in elaborati quando la dichiarazione è richiesta">Uso non dichiarato quando richiesto</label>
+<label class="check"><input type="checkbox" value="Uso in violazione dei limiti di età o dei termini del fornitore">Violazione limiti d'età/condizioni</label>
+</div></div>
+<div class="field"><label>Costi e abbonamenti a carico delle famiglie</label><select id="familyCosts"><option value="" selected>— Seleziona —</option><option>Non si richiedono strumenti o abbonamenti a pagamento a carico di studenti e famiglie</option><option>Eventuali costi sono ammessi solo nell’ambito di progetti specifici preventivamente deliberati e con misure per garantire alternative e pari accesso</option><option>Da definire con gli organi competenti prima di qualsiasi richiesta alle famiglie</option></select></div>
+<div class="field full"><label>Regole per esperti esterni, formatori e collaboratori</label><textarea id="externalUsers" placeholder="Es. accesso solo alle piattaforme autorizzate dall’Istituto, account e permessi limitati, istruzioni preventive, riservatezza, supervisione del referente interno e revoca degli accessi al termine dell’incarico. Indicare le conseguenze contrattuali in caso di violazione, secondo gli atti e gli accordi applicabili."></textarea></div>
+<div class="field full"><label>Ulteriori condizioni, eccezioni o divieti deliberati</label><textarea id="usageNotes"></textarea></div>
+</div></section>
+
+<section class="section" data-section="4">
+<h2>Studenti e famiglie</h2><p class="intro">Regole educative, limiti di età, comunicazione e corresponsabilità.</p>
+<div class="grid">
+<div class="field"><label>Modalità di accesso degli studenti</label><select id="studentAccess"><option>Solo tramite account o ambienti predisposti/autorizzati dalla scuola</option><option>Account individuali gestiti dalla famiglia, previa informazione</option><option>Solo dimostrazione del docente, senza account degli studenti</option><option>Da valutare in base all'età e al servizio</option></select></div>
+<div class="field"><label>Coinvolgimento delle famiglie</label><select id="familyRole"><option>Informazione preventiva e coinvolgimento secondo attività e strumenti</option><option>Informativa generale e comunicazioni specifiche quando necessarie</option><option>Autorizzazione/consenso solo quando richiesto dalla normativa e dal trattamento</option><option>Da definire caso per caso</option></select></div>
+<div class="field"><label>Limiti di età dei servizi</label><select id="ageLimits"><option>Verifica obbligatoria delle condizioni d'età di ciascun fornitore</option><option>Uso diretto degli studenti solo su servizi compatibili con età e condizioni d'uso</option><option>Interazione mediata dal docente quando non è previsto un account dello studente</option></select></div>
+<div class="field full"><label>Regole specifiche per fasce d’età (soglia dei 14 anni)</label><select id="age14Policy"><option value="" selected>— Seleziona —</option><option>Studenti di età inferiore a 14 anni: niente account individuali; uso mediato dal docente o in ambienti protetti. Studenti di almeno 14 anni: eventuale accesso solo a servizi autorizzati, compatibili con età e condizioni del fornitore, previa informazione e verifica della base giuridica e degli eventuali consensi necessari.</option><option>Per entrambe le fasce: uso esclusivamente mediato dal docente, senza account individuali degli studenti.</option><option>Regole differenziate definite per ciascun servizio, progetto e ordine di scuola, dopo verifica delle condizioni del fornitore e degli adempimenti privacy.</option><option>Da definire prima di consentire accessi individuali.</option></select><small class="help">La soglia dei 14 anni riguarda il consenso privacy per l’offerta diretta di servizi della società dell’informazione quando il trattamento si basa sul consenso; non costituisce un’autorizzazione generale all’uso di piattaforme o alla stipula di contratti.</small></div>
+<div class="field"><label>Regole per elaborati e compiti</label><select id="studentWork"><option>Uso ammesso secondo consegna, con dichiarazione e rielaborazione personale</option><option>Uso ammesso solo se espressamente indicato dal docente</option><option>Uso non ammesso salvo attività dedicate</option></select></div>
+<div class="field full"><label>Indicazioni per dichiarare l'uso dell'IA negli elaborati</label><textarea id="studentDeclaration" placeholder="Es. indicare strumento, attività svolta, parti assistite e controllo personale delle informazioni."></textarea></div>
+<div class="field full"><label>Modalità di informazione alle famiglie</label><div class="checks" id="familyInfo">
+<label class="check"><input type="checkbox" value="Pubblicazione del regolamento sul sito istituzionale">Pubblicazione sul sito</label>
+<label class="check"><input type="checkbox" value="Circolare o comunicazione alle famiglie">Circolare alle famiglie</label>
+<label class="check"><input type="checkbox" value="Incontri informativi">Incontri informativi</label>
+<label class="check"><input type="checkbox" value="Informative specifiche per le piattaforme utilizzate">Informative per piattaforma</label>
+<label class="check"><input type="checkbox" value="Comunicazioni tramite registro elettronico">Registro elettronico</label>
+</div></div>
+<div class="field full"><label>Ulteriori misure per tutela dei minori, inclusione e accessibilità</label><textarea id="minorNotes"></textarea></div>
+</div></section>
+
+<section class="section" data-section="5">
+<h2>Privacy, sicurezza e gestione dei rischi</h2><p class="intro">Questa sezione raccoglie le scelte organizzative. Non sostituisce l'informativa privacy, la valutazione del DPO/RPD o gli eventuali adempimenti richiesti.</p>
+<div class="note">Attenzione: non inserire nel regolamento affermazioni generiche come “nessun dato personale viene trattato” se ciò non è stato verificato. Le condizioni dipendono da piattaforma, configurazione, finalità e ruoli privacy.</div>
+<div class="grid">
+<div class="field"><label>Titolare del trattamento</label><input id="controller" placeholder="Denominazione dell'istituto"></div>
+<div class="field"><label>Contatto privacy istituzionale</label><input id="privacyContact" placeholder="Email o PEC"></div>
+<div class="field"><label>DPO/RPD – nominativo o organizzazione</label><input id="dpo"></div>
+<div class="field"><label>Contatto DPO/RPD</label><input id="dpoContact"></div>
+<div class="field"><label>Valutazione preventiva degli strumenti</label><select id="riskReview"><option>Valutazione preliminare con coinvolgimento del DPO/RPD e delle figure competenti</option><option>Valutazione del gruppo IA e successivo coinvolgimento del DPO/RPD quando necessario</option><option>Procedura da formalizzare</option></select></div>
+<div class="field"><label>Gestione dei dati inseriti nei sistemi</label><select id="dataRule"><option>Divieto di inserire dati personali o riservati salvo preventiva autorizzazione e garanzie documentate</option><option>Uso limitato ai dati minimizzati, anonimizzati o pseudonimizzati, secondo procedura</option><option>Regole specifiche definite per ciascuna piattaforma autorizzata</option></select></div>
+<div class="field"><label>Trasferimenti extra SEE</label><select id="transfer"><option>Verifica preventiva dei trasferimenti e delle garanzie applicabili</option><option>Utilizzo solo di servizi per i quali siano state verificate le condizioni di trasferimento</option><option>Da verificare per ogni piattaforma</option></select></div>
+<div class="field"><label>Conservazione e cancellazione</label><select id="retention"><option>Secondo finalità, tempi istituzionali e condizioni contrattuali del servizio</option><option>Secondo un piano interno documentato per ciascun servizio</option><option>Da definire in istruttoria con il DPO/RPD</option></select></div>
+<div class="field full"><label>Misure di sicurezza e controllo</label><div class="checks" id="security">
+<label class="check"><input type="checkbox" value="Account individuali e credenziali protette">Account individuali e credenziali protette</label>
+<label class="check"><input type="checkbox" value="Autenticazione a più fattori ove disponibile">Autenticazione a più fattori</label>
+<label class="check"><input type="checkbox" value="Verifica delle impostazioni di privacy e addestramento dei modelli">Verifica impostazioni privacy/addestramento</label>
+<label class="check"><input type="checkbox" value="Controllo degli accessi e dei permessi">Controllo accessi e permessi</label>
+<label class="check"><input type="checkbox" value="Aggiornamento e verifica periodica delle piattaforme">Verifica periodica piattaforme</label>
+<label class="check"><input type="checkbox" value="Procedure di backup e gestione delle credenziali">Backup e gestione credenziali</label>
+<label class="check"><input type="checkbox" value="Informazione degli utenti sui rischi di phishing e prompt injection">Formazione su phishing e prompt injection</label>
+</div></div>
+<div class="field full"><label>Documenti e valutazioni da predisporre o aggiornare</label><textarea id="privacyDocs" placeholder="Es. registro dei trattamenti, accordi art. 28 GDPR, informative, DPIA ove necessaria, valutazione dei rischi, misure di sicurezza..."></textarea></div>
+<div class="field full"><label>Regole specifiche per PEI, PDP e documentazione BES/DSA</label><textarea id="peiPdpRule" placeholder="Indicare il divieto di inserire in piattaforme IA esterne dati identificativi, diagnosi, certificazioni o informazioni sanitarie riconducibili agli studenti. Eventuali materiali destinati a usi consentiti devono essere previamente e irreversibilmente anonimizzati alla fonte; la sola rimozione del nome non è sufficiente. Ogni eventuale trattamento diverso richiede una specifica valutazione giuridica, tecnica e organizzativa."></textarea><small class="help">Impostazione prudenziale: non caricare diagnosi, dati sanitari o documenti PEI/PDP identificabili in servizi IA generativi. La pseudonimizzazione non equivale ad anonimizzazione.</small></div>
+<div class="field full"><label>Benessere degli studenti e impatti psicologici/educativi</label><textarea id="studentWellbeing" placeholder="Es. uso equilibrato, prevenzione di dipendenza e sovraesposizione, tutela delle relazioni, attenzione a isolamento, ansia, pressione prestazionale e carico cognitivo; osservazione e interventi educativi secondo le competenze della scuola."></textarea></div>
+<div class="field full"><label>Ulteriori prescrizioni privacy e sicurezza</label><textarea id="privacyNotes"></textarea></div>
+</div></section>
+
+<section class="section" data-section="6">
+<h2>Registro delle piattaforme e degli strumenti IA</h2><p class="intro">Inserire gli strumenti effettivamente utilizzati o proposti. Il registro sarà generato come allegato aggiornabile al regolamento.</p>
+<div id="platforms"></div>
+<div class="actions"><button class="secondary" type="button" onclick="addPlatform()">＋ Aggiungi piattaforma</button></div>
+<div class="note">Per ciascun servizio è opportuno verificare: fornitore, finalità, categorie di utenti, limiti d'età, condizioni d'uso, account, dati trattati, localizzazione e conservazione, impostazioni privacy, eventuali accordi e stato dell'istruttoria.</div>
+<div class="field full"><label>Criteri per inserimento, autorizzazione e rimozione dal registro</label><textarea id="platformRules" placeholder="Es. proposta motivata, scheda tecnica, verifica del gruppo IA e del DPO, autorizzazione, aggiornamento del registro..."></textarea></div>
+</section>
+
+<section class="section" data-section="7">
+<h2>Formazione, codice di condotta e gestione delle segnalazioni</h2><p class="intro">Definire come l'istituto diffonde competenze, regole di comportamento e canali di segnalazione.</p>
+<div class="grid">
+<div class="field"><label>Formazione del personale</label><select id="trainingStaff"><option>Piano periodico per docenti e ATA</option><option>Formazione iniziale e aggiornamento periodico</option><option>Formazione su richiesta e in base ai rischi</option></select></div>
+<div class="field"><label>Educazione degli studenti</label><select id="trainingStudents"><option>Percorsi di alfabetizzazione all'IA integrati nella didattica</option><option>Attività specifiche per classi e fasce d'età</option><option>Interventi informativi su richiesta</option></select></div>
+<div class="field full"><label>Temi formativi</label><div class="checks" id="trainingTopics">
+<label class="check"><input type="checkbox" value="Funzionamento e limiti dei sistemi IA">Funzionamento e limiti</label>
+<label class="check"><input type="checkbox" value="Verifica delle fonti, accuratezza e allucinazioni">Verifica fonti e accuratezza</label>
+<label class="check"><input type="checkbox" value="Privacy e protezione dei dati personali">Privacy</label>
+<label class="check"><input type="checkbox" value="Etica, bias, equità e inclusione">Etica e bias</label>
+<label class="check"><input type="checkbox" value="Copyright, citazione e integrità degli elaborati">Copyright e integrità</label>
+<label class="check"><input type="checkbox" value="Sicurezza informatica e gestione degli incidenti">Sicurezza informatica</label>
+<label class="check"><input type="checkbox" value="Progettazione didattica e valutazione">Didattica e valutazione</label>
+</div></div>
+<div class="field"><label>È previsto un codice di condotta?</label><select id="codeConduct"><option>Sì, come parte del regolamento</option><option>Sì, come allegato autonomo</option><option>Da predisporre</option></select></div>
+<div class="field"><label>Canale per la segnalazione di problemi ed eventi critici</label><select id="reportChannel"><option>Modulo interno indirizzato a Dirigente, DSGA e referente IA</option><option>Segnalazione tramite email istituzionale dedicata</option><option>Procedura di segnalazione già esistente nell'istituto</option><option>Da definire</option></select></div>
+<div class="field full"><label>Eventi da segnalare</label><div class="checks" id="events">
+<label class="check"><input type="checkbox" value="Accesso non autorizzato o compromissione di account">Accessi non autorizzati</label>
+<label class="check"><input type="checkbox" value="Malfunzionamenti o alterazioni del sistema">Malfunzionamenti</label>
+<label class="check"><input type="checkbox" value="Contenuti inappropriati, errati o discriminatori">Output inappropriati/errati/discriminatori</label>
+<label class="check"><input type="checkbox" value="Violazione o divulgazione non autorizzata di dati">Violazioni o divulgazione dati</label>
+<label class="check"><input type="checkbox" value="Perdita o furto di dati">Perdita o furto dati</label>
+<label class="check"><input type="checkbox" value="Rischi per la sicurezza o i diritti delle persone">Rischi per persone e diritti</label>
+<label class="check"><input type="checkbox" value="Uso improprio o non autorizzato di strumenti IA">Uso improprio</label>
+</div></div>
+<div class="field full"><label>Misure immediate e flusso di gestione della segnalazione</label><textarea id="incidentProcedure" placeholder="Es. interrompere l'attività se necessario, non cancellare evidenze, informare tempestivamente i referenti, attivare le procedure privacy/cybersecurity applicabili..."></textarea></div>
+</div></section>
+
+<section class="section" data-section="8">
+<h2>Approvazione, entrata in vigore e revisione</h2><p class="intro">Completare i riferimenti amministrativi e il ciclo di aggiornamento.</p>
+<div class="grid">
+<div class="field"><label>Organo/i che approvano</label><input id="approvals" value="Collegio dei Docenti e Consiglio d'Istituto"></div>
+<div class="field"><label>Delibera del Collegio dei Docenti</label><input id="teacherResolution" placeholder="Numero e data"></div>
+<div class="field"><label>Delibera del Consiglio d'Istituto</label><input id="councilResolution" placeholder="Numero e data"></div>
+<div class="field"><label>Data di entrata in vigore</label><input id="effectiveDate" type="date"></div>
+<div class="field"><label>Numero di versione del regolamento</label><input id="docVersion" placeholder="Es. 1.0"></div>
+<div class="field"><label>Data dell’ultimo aggiornamento</label><input id="lastUpdate" type="date"></div>
+<div class="field"><label>Frequenza di revisione</label><select id="reviewCycle"><option>Annuale</option><option>Ogni due anni</option><option>Al verificarsi di modifiche normative, organizzative o tecnologiche rilevanti</option><option>Annuale e in caso di modifiche rilevanti</option></select></div>
+<div class="field"><label>Responsabile del monitoraggio</label><input id="monitor"></div>
+<div class="field full"><label>Eventi che attivano una revisione straordinaria</label><textarea id="reviewTriggers" placeholder="Es. nuove disposizioni normative, introduzione di nuovi sistemi, incidenti, esiti di audit, modifiche dei servizi o dei trattamenti."></textarea></div>
+<div class="field full"><label>Modalità di pubblicazione e diffusione</label><textarea id="publication" placeholder="Es. sito istituzionale, registro elettronico, circolari, consegna al personale..."></textarea></div>
+</div></section>
+
+<section class="section" data-section="9">
+<h2>Verifica e generazione del documento</h2><p class="intro">Prima di generare la bozza, controllare la completezza delle informazioni e le scelte che richiedono una valutazione specialistica.</p>
+<div id="sectionSummary"></div>
+<div id="audit"></div>
+<div class="note"><strong>Avvertenza:</strong> il documento generato è una bozza redazionale. Non certifica la conformità normativa delle scelte inserite. Prima dell'adozione occorrono verifica giuridico-amministrativa, valutazione privacy e sicurezza, coerenza con i documenti dell'istituto e approvazione degli organi competenti.</div>
+<div class="actions"><button class="primary" type="button" onclick="generate()">Genera regolamento e allegati</button><button class="secondary" type="button" onclick="saveData()">Salva questionario</button><button class="secondary" type="button" onclick="exportJSON()">Esporta dati</button><label class="secondary" style="cursor:pointer">Importa dati <input type="file" accept=".json,application/json" style="display:none" onchange="importJSON(event)"></label></div>
+<div class="note" style="margin-top:10px"><strong>Salva questionario:</strong> conserva le risposte in questo browser, così puoi riprendere la compilazione sullo stesso dispositivo.
+<br><strong>Esporta dati:</strong> scarica una copia della compilazione sul computer, utile come backup o per trasferirla su un altro dispositivo.
+<br><strong>Importa dati:</strong> carica una copia esportata in precedenza per recuperare le risposte.</div>
+</section>
+<div class="actions">
+<button class="secondary" id="prev" type="button" onclick="move(-1)">← Precedente</button>
+<button class="primary" id="next" type="button" onclick="move(1)">Avanti →</button>
+</div>
+</div>
+</main>
+</div>
+<div id="output">
+<div class="topline"><strong>Documento generato – bozza da revisionare</strong><span>È possibile stampare o salvare in PDF dal browser</span></div>
+<div class="actions">
+<button class="primary" onclick="window.print()">Stampa / Salva PDF</button>
+<button class="secondary" onclick="downloadDoc()">Scarica documento HTML</button>
+<button class="secondary" onclick="copyDoc()">Copia testo</button>
+<button class="secondary" onclick="document.getElementById('output').style.display='none'">Chiudi anteprima</button>
+</div>
+<div id="documentPreview"></div>
+</div>
+<footer>Versione 17.7.1 – guida integrata – chiarimento istituzionale e contatti autore – basata sulla 17.5.4 – i dati del questionario vengono salvati automaticamente nel browser utilizzato. Non invia informazioni a server esterni. Effettuare esportazioni periodiche dei dati per conservare una copia del lavoro.</footer>
+<script>
+function enterGenerator(){
+  document.body.classList.add('generator-open');
+  if(startupDraft){
+    const choice=document.getElementById('startupChoice');
+    if(choice)choice.style.display='flex';
+  }
+}
+function openGuide(){const modal=document.getElementById('guideModal');if(modal){modal.classList.add('open');document.body.style.overflow='hidden';const close=modal.querySelector('.guide-close');if(close)close.focus();}}
+function closeGuide(){const modal=document.getElementById('guideModal');if(modal){modal.classList.remove('open');document.body.style.overflow='';const opener=document.querySelector('.guide-open');if(opener)opener.focus();}}
+document.addEventListener('keydown',e=>{if(e.key==='Escape'&&document.getElementById('guideModal')?.classList.contains('open'))closeGuide();});
+let current=0, platformCount=0;
+const STORAGE_KEY='schoolAIRegulationDraft_v9_piattaforme_filtrate';
+const ids=['school','institutionType','schoolType','code','address','city','email','pec','website','principal','year','placement','docTitle','group','groupName','authorizer','incidentContact','aiReferent','aiReferentDuties','governanceNotes','dvrReview','studentWellbeing','relatedDocs','teacherUse','ataUse','studentUse','assessment','grading','adminUse','disclosure','usageNotes','studentAccess','familyRole','ageLimits','studentWork','studentDeclaration','minorNotes','age14Policy','familyCosts','externalUsers','peiPdpRule','controller','privacyContact','dpo','dpoContact','riskReview','dataRule','transfer','retention','privacyDocs','privacyNotes','platformRules','trainingStaff','trainingStudents','codeConduct','reportChannel','incidentProcedure','docVersion','lastUpdate','approvals','teacherResolution','councilResolution','effectiveDate','reviewCycle','monitor','reviewTriggers','publication'];
+function val(id){let e=document.getElementById(id);if(!e)return '';if(e.multiple)return [...e.selectedOptions].map(o=>o.value).join(', ');return e.value.trim()}
+function checked(id){return [...document.querySelectorAll('#'+id+' input:checked')].map(x=>x.value)}
+function esc(s){return String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
+function field(id){return `<p><strong>${esc(id)}:</strong> ${esc(val(id)||'Da completare')}</p>`}
+function move(n){current=Math.max(0,Math.min(9,current+n));showStep()}
+function showStep(){document.querySelectorAll('.section').forEach((s,i)=>s.classList.toggle('active',i===current));document.querySelectorAll('nav button').forEach((b,i)=>b.classList.toggle('active',i===current));document.getElementById('stepLabel').textContent=`Sezione ${current+1} di 10`;document.getElementById('progressBar').style.width=((current+1)*10)+'%';document.getElementById('prev').style.visibility=current===0?'hidden':'visible';document.getElementById('next').style.display=current===9?'none':'inline-block';if(current===9){try{makeAudit()}catch(err){const a=document.getElementById('audit');a.innerHTML='<div class="note"><strong>Controllo non completato.</strong> Si è verificato un errore durante la verifica. Riprova o segnala il problema.</div>';console.error('Errore controllo preliminare:',err)}}window.scrollTo({top:0,behavior:'smooth'})}
+document.querySelectorAll('nav button').forEach(b=>b.addEventListener('click',()=>{current=+b.dataset.step;showStep()}));
+function addPlatform(data={}){platformCount++;let d=document.createElement('div');d.className='cardrow platform';d.innerHTML=`<div class="rowhead"><strong>Strumento / piattaforma ${platformCount}</strong><button type="button" class="secondary danger" onclick="this.closest('.platform').remove()">Rimuovi</button></div><div class="grid">
+<div class="field"><label>Nome piattaforma / fornitore</label><input data-k="name" value="${esc(data.name||'')}" placeholder="Nome del servizio"></div>
+<div class="field"><label>URL</label><input data-k="url" value="${esc(data.url||'')}" placeholder="https://..."></div>
+<div class="field"><label>Ambito d'impiego</label><select data-k="area"><option>Didattica</option><option>Inclusione</option><option>Amministrazione</option><option>Comunicazione</option><option>Ricerca e sperimentazione</option><option>Altro</option></select></div>
+<div class="field"><label>Utenti autorizzati</label><input data-k="users" value="${esc(data.users||'')}" placeholder="Docenti, ATA, studenti..."></div>
+<div class="field"><label>Finalità e descrizione</label><input data-k="purpose" value="${esc(data.purpose||'')}"></div>
+<div class="field"><label>Modalità di accesso / account</label><input data-k="account" value="${esc(data.account||'')}" placeholder="Account istituzionale, individuale..."></div>
+<div class="field"><label>Età minima / condizioni d'uso</label><input data-k="age" value="${esc(data.age||'')}"></div>
+<div class="field"><label>Dati inseriti / categorie trattate</label><input data-k="data" value="${esc(data.data||'')}"></div>
+<div class="field"><label>Verifica privacy / fornitore</label><select data-k="privacy"><option>Da verificare</option><option>Verificata</option><option>Non applicabile – motivare</option><option>Non autorizzata</option></select></div>
+<div class="field"><label>Stato di autorizzazione nell’istituto</label><select data-k="status"><option>Proposto – in istruttoria</option><option>Autorizzato</option><option>Autorizzato con condizioni</option><option>Non autorizzato</option><option>In dismissione</option></select></div>
+<div class="field full"><label>Condizioni, limitazioni e note</label><textarea data-k="notes">${esc(data.notes||'')}</textarea></div></div>`;
+d.querySelector('[data-k="area"]').value=data.area||'Didattica';d.querySelector('[data-k="privacy"]').value=data.privacy||'Da verificare';d.querySelector('[data-k="status"]').value=data.status||'Proposto – in istruttoria';document.getElementById('platforms').appendChild(d)}
+function getPlatforms(){return [...document.querySelectorAll('.platform')].map(p=>Object.fromEntries([...p.querySelectorAll('[data-k]')].map(e=>[e.dataset.k,e.value.trim()]))).filter(p=>p.name); }
+function getPlatforms(){return [...document.querySelectorAll('.platform')].map(p=>Object.fromEntries([...p.querySelectorAll('[data-k]')].map(e=>[e.dataset.k,e.value.trim()]))).filter(p=>p.name);}
+let schoolHeaderImage='';let schoolHeaderWidth=100;
+function setSchoolHeaderWidth(value){schoolHeaderWidth=Math.max(50,Math.min(150,Number(value)||100));const slider=document.getElementById('schoolHeaderWidth'),label=document.getElementById('schoolHeaderWidthValue'),img=document.getElementById('schoolHeaderPreviewImg');if(slider)slider.value=schoolHeaderWidth;if(label)label.textContent=schoolHeaderWidth+'%';if(img){img.style.width=schoolHeaderWidth+'%';img.style.maxWidth='none';img.style.maxHeight='none';img.style.height='auto';img.style.display='block';img.style.margin='0 auto';}scheduleSave();}
+function renderSchoolHeader(){const preview=document.getElementById('schoolHeaderPreview'),img=document.getElementById('schoolHeaderPreviewImg'),remove=document.getElementById('removeSchoolHeader'),resize=document.getElementById('schoolHeaderResize');if(!preview||!img||!remove)return;const slider=document.getElementById('schoolHeaderWidth'),label=document.getElementById('schoolHeaderWidthValue');if(slider)slider.value=schoolHeaderWidth;if(label)label.textContent=schoolHeaderWidth+'%';img.style.width=schoolHeaderWidth+'%';img.style.maxWidth='none';img.style.maxHeight='none';img.style.height='auto';img.style.display='block';img.style.margin='0 auto';if(schoolHeaderImage){img.src=schoolHeaderImage;preview.style.display='block';remove.style.display='inline-block';if(resize)resize.style.display='block';}else{img.removeAttribute('src');preview.style.display='none';remove.style.display='none';if(resize)resize.style.display='none';}}
+function loadSchoolHeader(ev){const file=ev.target.files&&ev.target.files[0];if(!file)return;const allowed=['image/png','image/jpeg','image/webp'];if(!allowed.includes(file.type)){alert("Formato non supportato. Seleziona un’immagine PNG, JPG o WebP.");ev.target.value='';return;}if(file.size>2*1024*1024){alert('L’immagine supera il limite di 2 MB. Riduci le dimensioni del file e riprova.');ev.target.value='';return;}const reader=new FileReader();reader.onerror=()=>{alert('Non è stato possibile leggere l’immagine.');ev.target.value='';};reader.onload=()=>{if(typeof reader.result!=='string'||!reader.result.startsWith('data:image/')){alert('Il file selezionato non sembra essere un’immagine valida.');ev.target.value='';return;}schoolHeaderImage=reader.result;renderSchoolHeader();scheduleSave();};reader.readAsDataURL(file);}
+function removeSchoolHeader(){schoolHeaderImage='';schoolHeaderWidth=100;const input=document.getElementById('schoolHeaderFile');if(input)input.value='';renderSchoolHeader();scheduleSave();}
+function collect(){let o={};ids.forEach(id=>{let e=document.getElementById(id);o[id]=e?.multiple?[...e.selectedOptions].map(x=>x.value):e?.value??''});['members','duties','goals','principles','prohibitions','teacherActivities','familyInfo','security','trainingTopics','events','nationalLaws','strategicActs'].forEach(id=>o[id]=checked(id));o.platforms=getPlatforms();o.schoolHeaderImage=schoolHeaderImage||'';o.schoolHeaderWidth=schoolHeaderWidth;return o}
+function apply(o){ids.forEach(id=>{let e=document.getElementById(id);if(!e||o[id]===undefined)return;if(e.multiple){[...e.options].forEach(x=>x.selected=(o[id]||[]).includes(x.value))}else e.value=o[id]});['members','duties','goals','principles','prohibitions','teacherActivities','familyInfo','security','trainingTopics','events','nationalLaws','strategicActs'].forEach(id=>{document.querySelectorAll('#'+id+' input').forEach(x=>x.checked=(o[id]||[]).includes(x.value))});document.getElementById('platforms').innerHTML='';platformCount=0;(o.platforms||[]).forEach(addPlatform);schoolHeaderImage=typeof o.schoolHeaderImage==='string'&&o.schoolHeaderImage.startsWith('data:image/')?o.schoolHeaderImage:'';schoolHeaderWidth=Math.max(50,Math.min(150,Number(o.schoolHeaderWidth)||100));renderSchoolHeader();showStep()}
+let saveTimer=null;
+function saveData(){
+  if(saveTimer){clearTimeout(saveTimer);saveTimer=null;}
+  const status=document.getElementById('saveState');
+  try{
+    localStorage.setItem(STORAGE_KEY,JSON.stringify(collect()));
+    status.textContent='Salvato automaticamente in questo browser';
+    status.style.color='var(--green)';
+    return true;
+  }catch(err){
+    status.textContent='Salvataggio non riuscito: spazio o memoria del browser non disponibili';
+    status.style.color='#a33';
+    return false;
+  }
+}
+function scheduleSave(){
+  const status=document.getElementById('saveState');
+  status.textContent='Modifiche in corso…';
+  status.style.color='var(--amber)';
+  if(saveTimer)clearTimeout(saveTimer);
+  saveTimer=setTimeout(saveData,450);
+}
+function resetFormData(){
+  if(saveTimer){clearTimeout(saveTimer);saveTimer=null;}
+  localStorage.removeItem(STORAGE_KEY);
+  document.querySelectorAll('input,textarea,select').forEach(e=>{
+    if(e.type==='checkbox'||e.type==='radio')e.checked=e.defaultChecked;
+    else if(e.multiple)[...e.options].forEach(o=>o.selected=false);
+    else e.value=e.defaultValue;
+  });
+  document.getElementById('platforms').innerHTML='';platformCount=0;
+  schoolHeaderImage='';schoolHeaderWidth=100;const headerInput=document.getElementById('schoolHeaderFile');if(headerInput)headerInput.value='';renderSchoolHeader();
+  addPlatform({name:'',area:'Didattica'});
+  document.getElementById('output').style.display='none';
+  document.getElementById('saveState').textContent='Nuova compilazione – campi puliti';
+  current=0;showStep();
+}
+function newCompilation(){if(!confirm('Vuoi cancellare i dati della compilazione corrente e iniziarne una nuova? I dati salvati in questo browser verranno eliminati.'))return;resetFormData();}
+function resumePrevious(){
+  if(!startupDraft)return;
+  try{apply(startupDraft);document.getElementById('saveState').textContent='Compilazione precedente ripristinata';document.getElementById('saveState').style.color='var(--green)';}
+  catch(e){alert('Non è stato possibile recuperare la compilazione. Verrà avviato un questionario vuoto.');resetFormData();}
+  document.getElementById('startupChoice').style.display='none';
+}
+function startFreshFromWelcome(){resetFormData();document.getElementById('startupChoice').style.display='none';}
+function exportJSON(){let blob=new Blob([JSON.stringify(collect(),null,2)],{type:'application/json'});downloadBlob(blob,'questionario_regolamento_IA.json')}
+function validateImportData(data){
+  if(!data||typeof data!=='object'||Array.isArray(data))throw new Error('Il contenuto non è un oggetto di compilazione.');
+  const checkboxGroups=['members','duties','goals','principles','prohibitions','teacherActivities','familyInfo','security','trainingTopics','events','nationalLaws','strategicActs'];
+  for(const id of ids){
+    if(data[id]===undefined)continue;
+    const el=document.getElementById(id);
+    if(!el)continue;
+    if(el.multiple){if(!Array.isArray(data[id])||!data[id].every(x=>typeof x==='string'))throw new Error('Formato non valido per il campo '+id+'.');}
+    else if(typeof data[id]!=='string')throw new Error('Formato non valido per il campo '+id+'.');
+  }
+  for(const id of checkboxGroups){
+    if(data[id]!==undefined&&(!Array.isArray(data[id])||!data[id].every(x=>typeof x==='string')))throw new Error('Formato non valido per le selezioni della sezione '+id+'.');
+  }
+  if(data.schoolHeaderImage!==undefined && data.schoolHeaderImage!=='' && (typeof data.schoolHeaderImage!=='string' || !/^data:image\/(png|jpeg|webp);base64,[A-Za-z0-9+/=]+$/.test(data.schoolHeaderImage)))throw new Error('L’immagine di intestazione non è valida.');
+  if(data.platforms!==undefined){
+    if(!Array.isArray(data.platforms))throw new Error('Il registro delle piattaforme non ha un formato valido.');
+    const platformKeys=['name','url','area','users','purpose','account','age','data','privacy','status','notes'];
+    for(const item of data.platforms){
+      if(!item||typeof item!=='object'||Array.isArray(item))throw new Error('Una scheda piattaforma non è valida.');
+      for(const key of platformKeys)if(item[key]!==undefined&&typeof item[key]!=='string')throw new Error('Dato non valido nella scheda piattaforma ('+key+').');
+    }
+  }
+  return true;
+}
+function importJSON(ev){
+  const input=ev.target, f=input.files&&input.files[0];
+  if(!f)return;
+  const resetPicker=()=>{input.value='';};
+  if(f.size>5*1024*1024){alert('Il file è troppo grande: seleziona un file di massimo 5 MB.');resetPicker();return;}
+  const r=new FileReader();
+  r.onerror=()=>{alert('Non è stato possibile leggere il file selezionato. I dati correnti non sono stati modificati.');resetPicker();};
+  r.onload=()=>{
+    let imported;
+    try{
+      imported=JSON.parse(r.result);
+      validateImportData(imported);
+    }catch(err){
+      alert('Importazione non possibile: '+(err.message||'file non valido')+'\n\nLa compilazione corrente è rimasta invariata.');
+      resetPicker();return;
+    }
+    if(!confirm('Stai per importare una compilazione precedente. Le risposte attualmente presenti nel questionario verranno sostituite dai dati del file selezionato. Vuoi procedere?')){resetPicker();return;}
+    const previous=collect();
+    try{
+      apply(imported);
+      if(!saveData())throw new Error('Non è stato possibile salvare i dati importati nella memoria del browser.');
+      document.getElementById('saveState').textContent='Dati importati e salvati in questo browser';
+      document.getElementById('saveState').style.color='var(--green)';
+      alert('Importazione completata.');
+    }catch(err){
+      try{apply(previous);saveData();}catch(restoreError){}
+      alert('Importazione non completata: '+(err.message||'errore imprevisto')+'\nLa compilazione precedente è stata ripristinata.');
+    }
+    resetPicker();
+  };
+  r.readAsText(f);
+}
+function downloadBlob(blob,name){let a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download=name;a.click();URL.revokeObjectURL(a.href)}
+function goToSection(index){current=Math.max(0,Math.min(9,Number(index)||0));showStep()}
+function makeAudit(){
+  const blocking=[], attention=[], suggestions=[];
+  const add=(bucket,title,detail,section)=>bucket.push({title,detail,section});
+  // Informazioni indispensabili per identificare e contestualizzare la bozza.
+  if(!val('school'))add(blocking,'Denominazione dell’istituto mancante','Inserire la denominazione ufficiale dell’istituzione scolastica.',0);
+  if(!val('institutionType'))add(blocking,'Tipologia di istituto non indicata','Specificare la tipologia della scuola per contestualizzare il regolamento.',0);
+  if(!val('year'))add(blocking,'Anno scolastico mancante','Indicare l’anno scolastico di riferimento.',0);
+  if(!val('principal'))add(blocking,'Dirigente scolastico non indicato','Completare il riferimento al Dirigente scolastico.',0);
+  if(!val('controller'))add(blocking,'Titolare del trattamento non indicato','Identificare il titolare del trattamento dei dati personali.',5);
+  if(!val('approvals'))add(blocking,'Organi di approvazione non indicati','Specificare gli organi competenti per l’approvazione del regolamento.',8);
+  if(!val('docVersion'))add(blocking,'Versione del regolamento mancante','Indicare il numero di versione della bozza/regolamento.',8);
+
+  // Aspetti che richiedono una decisione o una verifica prima dell'adozione.
+  if(!val('aiReferent'))add(attention,'Referente per l’IA non individuato','Indicare il referente oppure descrivere la modalità organizzativa alternativa adottata dalla scuola.',1);
+  if(!val('dpo'))add(attention,'Riferimento DPO/RPD non indicato','Verificare e riportare il riferimento del Responsabile della protezione dei dati.',5);
+  if(!val('incidentContact'))add(attention,'Destinatario delle segnalazioni non indicato','Definire a chi devono essere trasmessi problemi ed eventi critici.',7);
+  if(!val('teacherUse'))add(attention,'Regole per l’uso da parte dei docenti non definite','Selezionare la regola adottata oppure esplicitare che è ancora da deliberare.',3);
+  if(!val('studentUse'))add(attention,'Regole per l’uso da parte degli studenti non definite','Chiarire se e a quali condizioni gli studenti possono utilizzare sistemi IA.',4);
+  const studentUse=val('studentUse');
+  if(studentUse && !studentUse.toLowerCase().includes('non consentito') && (!val('age14Policy') || val('age14Policy').startsWith('Da definire'))){
+    add(attention,'Regole per fasce d’età da completare','È previsto un possibile uso da parte degli studenti: definire le condizioni per età, account, servizi e adempimenti privacy.',4);
+  }
+  const platforms=getPlatforms();
+  platforms.forEach((p,i)=>{
+    if(p.status==='Autorizzato' && p.privacy!=='Verificata' && !p.privacy.startsWith('Non applicabile'))
+      add(attention,`Piattaforma “${p.name}”: autorizzazione da verificare`,`Lo strumento risulta autorizzato, ma la verifica privacy/fornitore è “${p.privacy||'non indicata'}”. Allineare lo stato prima dell’uso.`,6);
+    if(p.status==='Autorizzato' && (!p.users || !p.purpose || !p.account))
+      add(attention,`Piattaforma “${p.name}”: scheda incompleta`,'Completare utenti autorizzati, finalità e modalità di accesso/account.',6);
+    if(p.status.startsWith('Proposto') || p.privacy==='Da verificare')
+      add(attention,`Piattaforma “${p.name}”: istruttoria aperta`,'La proposta o la verifica privacy/fornitore non risulta conclusa. Non presentare lo strumento come già autorizzato.',6);
+  });
+  if(!checked('familyInfo').length && studentUse && !studentUse.toLowerCase().includes('non consentito'))
+    add(attention,'Informazione alle famiglie da definire','Sono previsti possibili utilizzi da parte degli studenti: indicare come vengono informate le famiglie.',4);
+  if(!val('riskReview') || val('riskReview')==='Procedura da formalizzare')
+    add(attention,'Valutazione preventiva degli strumenti da verificare','Controllare che la procedura di valutazione sia formalizzata e coerente con i ruoli privacy e le competenze interne.',5);
+
+  // Suggerimenti di completezza: non impediscono la bozza né equivalgono a obblighi automatici.
+  if(!checked('goals').length)add(suggestions,'Finalità dell’utilizzo non selezionate','Valutare se esplicitare le finalità perseguite dall’Istituto.',2);
+  if(!checked('principles').length)add(suggestions,'Principi non selezionati','Valutare quali principi l’Istituto intende richiamare espressamente.',2);
+  if(!platforms.length)add(suggestions,'Nessuna piattaforma censita','Se non sono ancora stati individuati strumenti, mantenere il registro da completare prima di autorizzare gli utilizzi.',6);
+  if(!val('dvrReview'))add(suggestions,'Valutazione dei rischi e DVR non descritti','Valutare se documentare il coinvolgimento delle figure competenti e l’eventuale aggiornamento del DVR.',1);
+  if(!val('studentWellbeing'))add(suggestions,'Benessere degli studenti non approfondito','Valutare l’inserimento di indicazioni educative sul benessere e sull’uso equilibrato dell’IA.',5);
+  if(!val('peiPdpRule'))add(suggestions,'Regole PEI/PDP non personalizzate','Verificare che le indicazioni generali siano adeguate alle procedure e alle esigenze dell’Istituto.',5);
+  if(!checked('trainingTopics').length && !val('trainingStaff') && !val('trainingStudents'))add(suggestions,'Formazione non dettagliata','Valutare l’inserimento di obiettivi e attività formative per il personale e/o gli studenti.',7);
+  if(!val('reviewCycle'))add(suggestions,'Frequenza di revisione da verificare','Confermare la periodicità e gli eventi che attivano una revisione straordinaria.',8);
+
+  const total=blocking.length+attention.length+suggestions.length;
+  const renderGroup=(title,items,cls)=>`<div class="audit-group"><h3>${title} (${items.length})</h3>${items.length?items.map(x=>`<div class="audit-item"><strong>${esc(x.title)}</strong><p>${esc(x.detail)}</p><button type="button" class="audit-jump" data-audit-section="${x.section}">Vai alla sezione ${x.section+1}</button></div>`).join(''):'<p>Nessun elemento rilevato.</p>'}</div>`;
+  document.getElementById('audit').innerHTML=`<h3>Controllo preliminare</h3><p>Il controllo esamina completezza e coerenza redazionale delle risposte. Non sostituisce la verifica giuridica, privacy, tecnica o amministrativa.</p><div class="audit-summary"><div class="audit-count"><strong>${blocking.length}</strong><span>Bloccanti per la finalizzazione</span></div><div class="audit-count"><strong>${attention.length}</strong><span>Attenzioni da verificare</span></div><div class="audit-count"><strong>${suggestions.length}</strong><span>Suggerimenti facoltativi</span></div></div><p><strong>Piattaforme censite:</strong> ${platforms.length}. <strong>Sezioni del questionario:</strong> 10.</p>${renderGroup('Bloccanti',blocking,'blocking')}${renderGroup('Attenzioni',attention,'attention')}${renderGroup('Suggerimenti',suggestions,'suggestions')}<div class="note"><strong>Nota:</strong> i bloccanti indicano informazioni indispensabili da completare prima di considerare il documento pronto per l’approvazione. Non impediscono la generazione della bozza. Le attenzioni richiedono una verifica; i suggerimenti sono facoltativi.</div>`;
+  document.querySelectorAll('[data-audit-section]').forEach(btn=>btn.addEventListener('click',()=>goToSection(btn.dataset.auditSection)));
+  renderSectionSummary({blocking,attention,suggestions});
+  return {blocking,attention,suggestions};
+}
+function renderSectionSummary(audit){
+  const names=['Identità e contesto','Governance e responsabilità','Finalità e principi','Utilizzi e regole','Studenti e famiglie','Privacy e sicurezza','Piattaforme IA','Formazione e segnalazioni','Approvazione e revisione','Verifica finale'];
+  const root=document.getElementById('sectionSummary');
+  if(!root)return;
+  root.innerHTML='<div class="summary-panel"><h3>Riepilogo delle dieci sezioni</h3><p>Consulta le segnalazioni associate a ciascuna sezione e torna direttamente ai campi da rivedere. Il riepilogo non certifica che una sezione sia completa: indica soltanto gli elementi rilevati dal controllo preliminare.</p><div class="summary-list">'+names.map((name,i)=>{
+    const b=audit.blocking.filter(x=>x.section===i).length;
+    const a=audit.attention.filter(x=>x.section===i).length;
+    const g=audit.suggestions.filter(x=>x.section===i).length;
+    const total=b+a+g;
+    const status=total?`${b} bloccanti · ${a} attenzioni · ${g} suggerimenti`:'Nessuna segnalazione rilevata';
+    return `<div class="summary-row"><div><strong>${i+1}. ${name}</strong><small>${status}</small></div><button type="button" class="secondary summary-jump" data-summary-section="${i}">Apri sezione</button></div>`;
+  }).join('')+'</div></div>';
+  root.querySelectorAll('[data-summary-section]').forEach(btn=>btn.addEventListener('click',()=>goToSection(btn.dataset.summarySection)));
+}
+function list(items){return items.length?'<ul>'+items.map(x=>`<li>${esc(x)}</li>`).join('')+'</ul>':'<p><em>Da definire in sede di approvazione.</em></p>'}
+function pending(id){const el=document.getElementById(id);const field=el?.closest('.field');const label=field?.querySelector('label')?.textContent?.trim()||id;return `<span class="pending-field">[DA COMPLETARE: ${esc(label)}]</span>`}
+function para(id){return val(id)?esc(val(id)):pending(id)}
+function completionPage(audit){const groups=[['Informazioni indispensabili da completare',audit.blocking,'pending-blocking'],['Aspetti da verificare prima dell’approvazione',audit.attention,'pending-attention'],['Suggerimenti facoltativi',audit.suggestions,'pending-suggestion']];const count=audit.blocking.length+audit.attention.length+audit.suggestions.length;return `<section class="completion-page"><h2>Promemoria di completamento della bozza</h2><p>Questa sezione riepiloga gli elementi emersi dal controllo preliminare al momento della generazione. La bozza può essere utilizzata per la discussione, ma gli elementi indicati devono essere esaminati prima dell’approvazione.</p>${count?groups.map(([title,items,cls])=>items.length?`<div class="${cls}"><h3>${title} (${items.length})</h3><ul>${items.map(x=>`<li><strong>${esc(x.title)}</strong> – ${esc(x.detail)} <em>(Sezione ${x.section+1})</em></li>`).join('')}</ul></div>`:'').join(''):'<p class="complete-note">Il controllo preliminare non ha rilevato campi mancanti o segnalazioni. Restano comunque necessarie le verifiche giuridiche, amministrative, privacy e di sicurezza.</p>'}<p class="completion-warning"><strong>Attenzione:</strong> la presenza di questo promemoria non sostituisce la revisione del gruppo di lavoro. I campi non compilati sono evidenziati nel testo con la dicitura «DA COMPLETARE».</p></section>`}
+function generate(){const auditResult=makeAudit();let s=val('school')?esc(val('school')):pending('school');let schoolTypes=val('schoolType')?esc(val('schoolType')):pending('schoolType');let p=getPlatforms();let completion=completionPage(auditResult);let h=`<section style="min-height:65vh;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:45px 20px 70px;page-break-after:always;border-bottom:1px solid #ddd;margin-bottom:35px">${schoolHeaderImage?`<div style="width:100%;margin:0 auto 28px;text-align:center"><img src="${schoolHeaderImage}" alt="Intestazione della scuola" style="width:${schoolHeaderWidth}%;max-width:none;max-height:none;height:auto;object-fit:contain;display:block;margin:0 auto"></div>`:''}<div style="font-size:13px;letter-spacing:2px;text-transform:uppercase;color:#526779;margin-bottom:55px">${esc(val('city')||'Istituzione scolastica')}</div><h1 style="font-size:30px;line-height:1.25;max-width:760px;margin:0 auto 28px">${esc(val('docTitle')||'Regolamento per l’utilizzo dell’Intelligenza Artificiale')}</h1><p style="font-size:21px;margin:0 0 12px"><strong>${s}</strong></p><p style="font-size:16px;margin:0 0 10px">Ordini di scuola: ${schoolTypes}</p><p style="font-size:15px;color:#526779;margin:0 0 55px">${val('year')?esc(val('year')):pending('year')}</p><p style="font-size:12px;letter-spacing:1.5px;border-top:1px solid #9aabb8;padding-top:16px;max-width:500px">BOZZA PER LA DISCUSSIONE E L’APPROVAZIONE</p></section>${completion}<h2>Premessa</h2><p>Il presente regolamento disciplina l'adozione e l'utilizzo di sistemi e strumenti di Intelligenza Artificiale (IA) nell'ambito delle attività istituzionali di ${esc(s)}, con l'obiettivo di promuovere un impiego consapevole, responsabile, trasparente e coerente con le finalità educative e organizzative dell'Istituto.</p><p>L'IA costituisce uno strumento di supporto e non sostituisce la responsabilità, il giudizio professionale, la relazione educativa e la capacità decisionale delle persone. Gli output generati devono essere valutati criticamente e verificati prima del loro utilizzo.</p><p>Il regolamento è predisposto tenendo conto del Regolamento (UE) 2024/1689 (AI Act), del Regolamento (UE) 2016/679 (GDPR) e, per quanto pertinente, dei seguenti riferimenti nazionali selezionati dall'Istituto:</p>${list(checked('nationalLaws'))}<p>I riferimenti normativi e la loro applicabilità al contesto dell'Istituto dovranno essere verificati prima dell'approvazione e mantenuti aggiornati.</p>${checked('strategicActs').length?'<h3>Raccordo con gli atti della scuola</h3><p>Il presente regolamento è raccordato ai seguenti atti, secondo le procedure di aggiornamento, approvazione e pubblicazione previste per ciascuno di essi:</p>'+list(checked('strategicActs'))+(checked('strategicActs').includes('Patto Educativo di Corresponsabilità')?'<p>Il raccordo con il Patto Educativo di Corresponsabilità richiede, ove necessario, un aggiornamento formale e la condivisione/sottoscrizione secondo la disciplina applicabile. Le regole disciplinari restano quelle adottate negli atti competenti dell&#39;Istituto e nel rispetto dello Statuto delle studentesse e degli studenti.</p>':''):''}
+<h2>Titolo I – Disposizioni generali</h2><h3>Art. 1 – Oggetto e finalità</h3><p>Il regolamento definisce principi, ambiti, condizioni e responsabilità per l'utilizzo dell'IA nelle attività didattiche, educative, amministrative e organizzative dell'Istituto. Le finalità individuate sono:</p>${list(checked('goals'))}<h3>Art. 2 – Ambito di applicazione</h3><p>Le disposizioni si applicano, secondo i rispettivi ruoli e responsabilità, al Dirigente scolastico, al personale docente e ATA, agli studenti, alle famiglie, agli esperti esterni e ai collaboratori coinvolti nelle attività dell'Istituto, nei limiti delle attività e degli strumenti disciplinati.</p><p>Tipologia di istituto: ${para('institutionType')}. Ordini di scuola: ${para('schoolType')}.</p><p>Raccordo con gli atti strategici: ${esc(checked('strategicActs').join('; ')||'Da definire')}.</p><h3>Art. 3 – Definizioni</h3><p>Per sistema di IA si intende un sistema automatizzato che, con diversi livelli di autonomia, elabora gli input ricevuti per generare output quali previsioni, contenuti, raccomandazioni o decisioni. Per IA generativa si intendono strumenti capaci di produrre contenuti testuali, visivi, audio, video o codice. Per supervisione umana si intende il controllo effettivo esercitato da una persona competente sull'utilizzo e sugli output del sistema.</p><h3>Art. 4 – Principi generali</h3>${list(checked('principles'))}<p>L'utilizzo è improntato a proporzionalità, trasparenza, sicurezza, tutela dei minori e rispetto dei diritti fondamentali. La responsabilità delle decisioni e degli atti resta in capo ai soggetti umani competenti.</p>
+<h2>Titolo II – Governance e responsabilità</h2><h3>Art. 5 – Organizzazione e coordinamento</h3><p>Gruppo di lavoro: ${para('group')}. Denominazione: ${para('groupName')}.</p><p>Componenti previsti: ${esc(checked('members').join(', ')||'Da individuare')}.</p><p>Compiti: ${esc(checked('duties').join('; ')||'Da definire')}.</p><p>Autorizzazione e coordinamento: ${para('authorizer')}.</p><p>Referente per l’IA: ${para('aiReferent')}. Compiti: ${para('aiReferentDuties')}</p><p>${para('governanceNotes')}</p><h3>Art. 6 – Responsabilità del personale</h3><p>Il personale utilizza esclusivamente strumenti coerenti con le finalità istituzionali e con le condizioni stabilite dall'Istituto. Chi utilizza un sistema verifica gli output, ne valuta attendibilità e adeguatezza, rispetta le regole di riservatezza e non delega al sistema decisioni che competono alla persona o agli organi scolastici.</p><h3>Art. 7 – Utilizzo da parte dei docenti</h3><p>${para('teacherUse')}.</p><p>Ambiti di utilizzo individuati: ${esc(checked('teacherActivities').join('; ')||'Da definire')}.</p><p>Il docente mantiene la responsabilità della progettazione, della selezione dei materiali, della conduzione didattica e della valutazione. Gli output generati devono essere controllati, contestualizzati e adattati alle esigenze della classe e dei singoli studenti.</p><h3>Art. 8 – Utilizzo da parte del personale ATA</h3><p>${para('ataUse')}.</p><h3>Art. 9 – Utilizzo in ambito amministrativo</h3><p>${para('adminUse')}. L'IA non sostituisce i controlli, le verifiche, le firme, le competenze e le responsabilità previste per la formazione degli atti amministrativi.</p>
+<h2>Titolo III – Studenti e attività didattiche</h2><h3>Art. 10 – Utilizzo da parte degli studenti</h3><p>${para('studentUse')}. Modalità di accesso: ${para('studentAccess')}.</p><p>Gli studenti rispettano le consegne del docente, verificano le informazioni, non presentano come proprio un contenuto generato senza il lavoro personale richiesto e non utilizzano l'IA per eludere le regole delle attività didattiche.</p><h3>Art. 11 – Verifiche, valutazione e integrità degli elaborati</h3><p>Durante verifiche e prove valutative: ${para('assessment')}. Per l'uso dell'IA nella valutazione: ${para('grading')}.</p><p>Regola per compiti ed elaborati: ${para('studentWork')}.</p><p>Indicazioni di dichiarazione: ${para('studentDeclaration')} ${para('disclosure')}</p><h3>Art. 12 – Famiglie e tutela dei minori</h3><p>Coinvolgimento delle famiglie: ${para('familyRole')}. I limiti di età e le condizioni contrattuali dei fornitori devono essere verificati prima dell'uso diretto da parte degli studenti. Le modalità di informazione previste sono: ${esc(checked('familyInfo').join('; ')||'Da definire')}.</p><p>Regole per fasce d'età: ${para('age14Policy')}</p><p>${para('minorNotes')}</p>
+<h2>Titolo IV – Usi non consentiti e condizioni</h2><h3>Art. 13 – Divieti e limitazioni</h3><p>In coerenza con la normativa applicabile e con le valutazioni dell'Istituto, sono vietati o sottoposti a specifica istruttoria i seguenti utilizzi:</p>${list(checked('prohibitions'))}<p>Costi per studenti e famiglie: ${para('familyCosts')}.</p><p>Esperti esterni e collaboratori: ${para('externalUsers')}</p><p>Ulteriori condizioni: ${para('usageNotes')}</p><h3>Art. 14 – Trasparenza e comunicazione</h3><p>L'utilizzo dell'IA è dichiarato quando richiesto dalla consegna, dalla natura dell'attività o dalle disposizioni applicabili. Le informazioni devono essere comprensibili e proporzionate al contesto. Le modalità specifiche sono: ${para('disclosure')}.</p>
+<h2>Titolo V – Protezione dei dati, sicurezza e gestione dei rischi</h2><h3>Art. 15 – Protezione dei dati personali</h3><p>Titolare del trattamento: ${para('controller')}. Contatto: ${para('privacyContact')}. DPO/RPD: ${para('dpo')} – ${para('dpoContact')}.</p><p>${para('dataRule')}. Ogni trattamento deve essere valutato in relazione a finalità, categorie di dati, soggetti interessati, ruoli privacy, base giuridica, informative, tempi di conservazione e garanzie applicabili. Il coinvolgimento del DPO/RPD avviene secondo le competenze previste.</p><p>Valutazione preventiva: ${para('riskReview')}. Trasferimenti: ${para('transfer')}. Conservazione: ${para('retention')}.</p><p>Documenti da predisporre/verificare: ${para('privacyDocs')}</p><p>PEI, PDP e documentazione BES/DSA: ${para('peiPdpRule')}</p><h3>Art. 16 – Sicurezza</h3>${list(checked('security'))}<p>${para('privacyNotes')}</p><p>Valutazione dei rischi per il personale e DVR: ${para('dvrReview')}</p><p>Benessere degli studenti: ${para('studentWellbeing')}</p><h3>Art. 17 – Valutazione e gestione dei rischi</h3><p>L'introduzione e l'impiego dei sistemi sono accompagnati da verifiche proporzionate ai rischi, considerando almeno sicurezza informatica, possibili errori e distorsioni, impatti sui minori, tutela dei diritti, affidabilità e dipendenza dai fornitori. Le valutazioni specialistiche e gli eventuali adempimenti richiesti sono documentati prima della messa in uso.</p>
+<h2>Titolo VI – Registro degli strumenti, formazione e condotta</h2><h3>Art. 18 – Registro delle piattaforme</h3><p>L'Istituto mantiene un registro aggiornato degli strumenti IA utilizzati o proposti. L'inserimento nel registro non equivale di per sé ad autorizzazione: fanno fede lo stato e le condizioni riportate nella scheda dello strumento.</p><p>${para('platformRules')}</p><h3>Art. 19 – Formazione e alfabetizzazione all'IA</h3><p>Formazione del personale: ${para('trainingStaff')}. Educazione degli studenti: ${para('trainingStudents')}.</p>${list(checked('trainingTopics'))}<h3>Art. 20 – Codice di condotta</h3><p>${para('codeConduct')}. Gli utenti devono rispettare le regole di correttezza, riservatezza, trasparenza, verifica degli output, rispetto del diritto d'autore e uso appropriato delle risorse digitali.</p>
+<h2>Titolo VII – Segnalazioni, responsabilità e disposizioni finali</h2><h3>Art. 21 – Segnalazione e gestione di problemi ed eventi critici nell’utilizzo dell’IA</h3><p>Canale: ${para('reportChannel')}. Destinatario/referente: ${para('incidentContact')}.</p><p>Devono essere segnalati tempestivamente, secondo le procedure interne applicabili, eventi quali:</p>${list(checked('events'))}<p>Procedura: ${para('incidentProcedure')}</p><h3>Art. 22 – Responsabilità e conseguenze delle violazioni</h3><p>Le violazioni sono esaminate secondo la normativa vigente, i contratti di lavoro, il Regolamento d'Istituto, lo Statuto delle studentesse e degli studenti e le altre disposizioni applicabili. Eventuali misure sono adottate dagli organi competenti, nel rispetto delle garanzie procedurali e del principio di proporzionalità.</p><h3>Art. 23 – Approvazione, entrata in vigore e revisione</h3><p>Organi di approvazione: ${para('approvals')}. Delibera Collegio Docenti: ${para('teacherResolution')}. Delibera Consiglio d'Istituto: ${para('councilResolution')}.</p><p>Versione: ${para('docVersion')}. Ultimo aggiornamento: ${para('lastUpdate')}.</p><p>Entrata in vigore: ${para('effectiveDate')}. Revisione: ${para('reviewCycle')}. Responsabile monitoraggio: ${para('monitor')}.</p><p>Eventi di revisione: ${para('reviewTriggers')}. Diffusione: ${para('publication')}.</p><p>Il regolamento è coordinato con i seguenti documenti: ${para('relatedDocs')}.</p>
+<h2>Allegato 1 – Registro delle piattaforme e dei sistemi IA</h2>`;
+if(p.length){h+='<table><thead><tr><th>Strumento</th><th>Ambito e utenti</th><th>Finalità</th><th>Accesso ed età</th><th>Dati</th><th>Verifica privacy</th><th>Stato</th><th>Note</th></tr></thead><tbody>'+p.map(x=>`<tr><td>${esc(x.name)}<br>${esc(x.url)}</td><td>${esc(x.area)}<br>${esc(x.users)}</td><td>${esc(x.purpose)}</td><td>${esc(x.account)}<br>${esc(x.age)}</td><td>${esc(x.data)}</td><td>${esc(x.privacy)}</td><td>${esc(x.status)}</td><td>${esc(x.notes)}</td></tr>`).join('')+'</tbody></table>'}else h+="<p>Nessuno strumento ancora censito. Il registro deve essere completato prima dell'autorizzazione degli strumenti.</p>";
+h+=`<h2>Allegato 2 – Linee essenziali di condotta</h2><ol><li>Utilizzare solo strumenti autorizzati o ammessi secondo le procedure dell'Istituto.</li><li>Non inserire dati personali, riservati o documenti interni in servizi non autorizzati.</li><li>Verificare accuratezza, fonti, pertinenza, eventuali distorsioni e diritti d'autore dei contenuti generati.</li><li>Dichiarare l'uso dell'IA quando previsto.</li><li>Non delegare all'IA valutazioni o decisioni che richiedono giudizio umano.</li><li>Segnalare tempestivamente anomalie, incidenti e usi impropri.</li><li>Rispettare limiti d'età, condizioni dei fornitori e disposizioni dell'Istituto.</li></ol><h2>Allegato 3 – Scheda per la segnalazione e la gestione di problemi ed eventi critici nell’utilizzo dell’IA</h2>
+<h3>1. Dati del segnalante</h3><p><strong>Ruolo (barrare una o più caselle):</strong></p><p>☐ Docente &nbsp;&nbsp; ☐ Personale ATA &nbsp;&nbsp; ☐ Studente &nbsp;&nbsp; ☐ Genitore/tutore &nbsp;&nbsp; ☐ Soggetto esterno</p><p><strong>Nome e cognome (facoltativo, se la procedura consente segnalazioni non nominative):</strong> __________________________________________</p><p><strong>Data della segnalazione:</strong> __________________ &nbsp; <strong>Contatto per eventuale riscontro:</strong> ______________________________</p>
+<h3>2. Riservatezza e tutela del segnalante</h3><p>☐ Chiedo che la mia identità e le informazioni che possono identificarmi siano trattate con riservatezza e comunicate soltanto alle persone che devono conoscerle per gestire la segnalazione.</p><p>Le segnalazioni effettuate in buona fede sono gestite senza ritorsioni o penalizzazioni per il solo fatto di aver segnalato. La riservatezza è assicurata nei limiti previsti dalla normativa e dalle esigenze di accertamento e gestione dell'evento; non equivale quindi a una garanzia assoluta di anonimato.</p>
+<h3>3. Descrizione e collocazione temporale dell'evento</h3><p><strong>Sistema IA, piattaforma e dispositivo utilizzato:</strong> ______________________________________________</p><p><strong>Quando si è verificato l'evento? (barrare una sola opzione):</strong></p><p>☐ Data precisa: ____________________ &nbsp;&nbsp; Ora (se nota): __________</p><p>☐ Intervallo di date: dal ____________________ al ____________________</p><p>☐ Evento ancora in corso – iniziato il ____________________ alle ore __________ (se noto)</p><p><strong>Descrizione di quanto accaduto, indicando le circostanze e le persone/sistemi coinvolti senza inserire dati personali non necessari:</strong></p><p style="min-height:75px;border-bottom:1px solid #777">&nbsp;</p><p style="min-height:45px;border-bottom:1px solid #777">&nbsp;</p>
+<h3>4. Tipologia dell'evento</h3><p>☐ Accesso non autorizzato / compromissione di account &nbsp; ☐ Malfunzionamento</p><p>☐ Output inappropriato, offensivo o discriminatorio &nbsp; ☐ Rischio o violazione della riservatezza</p><p>☐ Perdita, alterazione o divulgazione di dati &nbsp; ☐ Uso improprio dello strumento</p><p>☐ Possibile violazione di dati personali (data breach) &nbsp; ☐ Altro: __________________________</p>
+<h3>5. Conseguenze e misure già adottate</h3><p><strong>Persone, servizi o dati potenzialmente coinvolti (senza riportare dati personali nella scheda):</strong></p><p style="min-height:45px;border-bottom:1px solid #777">&nbsp;</p><p><strong>Misure immediate adottate e persone già informate:</strong></p><p style="min-height:45px;border-bottom:1px solid #777">&nbsp;</p><p><strong>Documenti o evidenze disponibili/allegate:</strong> ______________________________________________</p>
+<h3>6. Invio e gestione della segnalazione</h3><p><strong>Richiesta di riscontro:</strong> ☐ Sì &nbsp; ☐ No</p><p><strong>Destinatari interni indicati dall'Istituto:</strong> ${esc(val('incidentContact')||'Da individuare')}</p><p>La segnalazione di un possibile incidente che coinvolga dati personali deve essere trasmessa senza ritardo al Dirigente scolastico e ai referenti individuati dall'Istituto, incluso il DPO/RPD secondo la procedura interna. Non attendere la raccolta di tutte le informazioni per effettuare la prima comunicazione. Il termine di 72 ore previsto dal GDPR riguarda, quando ne ricorrono i presupposti, la notifica della violazione all'Autorità di controllo da parte del titolare del trattamento: non è un termine concesso al segnalante per comunicare l'evento.</p><p><strong>Data e ora di ricezione (a cura dell'Istituto):</strong> __________________________ &nbsp; <strong>Protocollo/riferimento:</strong> __________________</p><p><strong>Valutazione e azioni successive (a cura dei referenti):</strong></p><p style="min-height:65px;border-bottom:1px solid #777">&nbsp;</p><h2>Nota di revisione prima dell'adozione</h2><p>La bozza deve essere completata e verificata dall'Istituto. In particolare: controllare i riferimenti normativi aggiornati; distinguere divieti normativi da scelte organizzative interne; verificare la classificazione e le condizioni dei sistemi; validare privacy, sicurezza e rapporti con i fornitori; coordinare il testo con i regolamenti e le informative esistenti; acquisire le deliberazioni richieste.</p><p style="margin-top:45px">Luogo e data ____________________________</p><p>Il Dirigente scolastico ____________________________</p>`;
+document.getElementById('documentPreview').innerHTML=h;document.getElementById('output').style.display='block';document.getElementById('output').scrollIntoView({behavior:'smooth'})}
+function downloadDoc(){let content='<!DOCTYPE html><html lang="it"><head><meta charset="utf-8"><title>Regolamento IA</title><style>body{font:16px/1.6 Georgia,serif;max-width:900px;margin:40px auto;color:#222}h1,h2,h3{color:#17324d}h1{text-align:center}h2{border-bottom:1px solid #aaa;margin-top:28px}.pending-field{background:#fff1d6;color:#8a4b08;border:1px solid #e6b65c;padding:1px 5px;font-weight:bold}.completion-page{border:1px solid #e3b65f;background:#fffaf0;padding:18px 22px;margin:22px 0 30px}.pending-blocking h3{color:#a52a2a}.pending-attention h3{color:#956000}.pending-suggestion h3{color:#28638a}.completion-warning{border-top:1px solid #e3b65f;padding-top:10px;font-size:14px}table{width:100%;border-collapse:collapse;font-size:13px}td,th{border:1px solid #999;padding:6px;text-align:left;vertical-align:top}@media print{body{margin:15mm}}</style></head><body>'+document.getElementById('documentPreview').innerHTML+'</body></html>';downloadBlob(new Blob([content],{type:'text/html;charset=utf-8'}),'bozza_regolamento_IA.html')}
+function copyDoc(){let t=document.getElementById('documentPreview').innerText;navigator.clipboard?.writeText(t).then(()=>alert('Testo copiato.')).catch(()=>alert('Copia non disponibile in questo browser.'))}
+// Event delegation: intercetta anche i campi creati dinamicamente, incluse le piattaforme.
+document.addEventListener('input',e=>{if(e.target.matches('input,textarea,select'))scheduleSave();});
+document.addEventListener('change',e=>{if(e.target.matches('input,textarea,select'))scheduleSave();});
+// Aggiunta/rimozione delle schede piattaforma: salva dopo che il DOM è stato aggiornato.
+document.addEventListener('click',e=>{
+  const b=e.target.closest('button');
+  if(b && (b.getAttribute('onclick')||'').includes('addPlatform'))setTimeout(scheduleSave,0);
+  if(b && b.classList.contains('danger') && b.closest('.platform'))setTimeout(scheduleSave,0);
+});
+// Ultimo tentativo sincrono quando la pagina viene nascosta o chiusa.
+document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='hidden')saveData();});
+window.addEventListener('pagehide',()=>saveData());
+let startupDraft=null;
+try{
+  const saved=localStorage.getItem(STORAGE_KEY);
+  if(saved){startupDraft=JSON.parse(saved);if(!startupDraft||typeof startupDraft!=='object'||Array.isArray(startupDraft))throw new Error('Formato non valido');}
+}catch(e){localStorage.removeItem(STORAGE_KEY);startupDraft=null;}
+if(startupDraft){
+  // Non applicare i dati finché l'utente non sceglie se riprendere o iniziare da zero.
+  addPlatform({name:'',area:'Didattica'});
+  document.getElementById('startupChoice').style.display='flex';
+}else{
+  addPlatform({name:'',area:'Didattica'});
+}
+showStep();
+</script>
+</body></html>
